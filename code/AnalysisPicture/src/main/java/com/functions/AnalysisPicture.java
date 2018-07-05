@@ -22,35 +22,38 @@ import javax.net.ssl.SSLException;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class Function {
+public class AnalysisPicture {
 	
 	private final static int CONNECT_TIME_OUT = 30000;
-    private final static int READ_OUT_TIME = 50000;
-    private static String boundaryString = getBoundary();
-  
+	private final static int READ_OUT_TIME = 50000;
+	private static String boundaryString = getBoundary();
+	private static HashMap<String, String> map = new HashMap<String, String>();
+    private static HashMap<String, byte[]> byteMap = new HashMap<String, byte[]>();
+    
+	public AnalysisPicture(String key, String secret){
+		map.put("api_key", key);
+        map.put("api_secret", secret);
+    }
+	
    /*Get the face data from the picture*/
-   public static String getData(String filepath) throws Exception{
-   	 File file = new File(filepath);
-   	 byte[] buff = getBytesFromFile(file);
+	public String GetData(String filepath) throws Exception{
    		String url = "https://api-cn.faceplusplus.com/facepp/v3/detect";
-        HashMap<String, String> map = new HashMap<>();
-        HashMap<String, byte[]> byteMap = new HashMap<>();
-        map.put("api_key", "LNlB_BzBFjXhK1_p7xRSka2sy2HxvXoq");
-        map.put("api_secret", "SlgEwp14tq4oQ9OJx1h_voC6ijBaTGhi");
-   		map.put("return_landmark", "0");
-        map.put("return_attributes", "emotion");
-        byteMap.put("image_file", buff);
         try{
+        	File file = new File(filepath);
+          	byte[] buff = getBytesFromFile(file);
+        	map.put("return_landmark", "0");
+            map.put("return_attributes", "emotion");
+            byteMap.put("image_file", buff);
             byte[] bacd = post(url, map, byteMap);
             String str = new String(bacd);
             return str;
         }catch (Exception e) {
-       	 return "getdata fail";
+       	 	return "getdata fail";
    		}
    }
     
     /*Count the number of face from the String get from the picture*/
-	public static int NumofFace(String datastr) throws Exception {
+	public int NumOfFace(String datastr) throws Exception {
 		JSONObject json = JSONObject.fromObject(datastr);
         JSONArray faceset = json.getJSONArray("faces");
         int number = faceset.size();
@@ -58,12 +61,11 @@ public class Function {
 	}
 	
 	/*Get all face_token to a faceset*/
-	public static List<String> get_facetoken(String datastr) throws Exception {
+	public List<String> get_facetoken(String datastr) throws Exception {
 		List<String> facelist = new ArrayList<String>();
 		JSONObject json = JSONObject.fromObject(datastr);
 		JSONArray facearray = json.getJSONArray("faces");
 		int number = facearray.size();
-		System.out.println(number);
 		for (int i = 0; i < number; i++){
 			String face = JSONObject.fromObject(facearray.get(i)).getString("face_token");
 			facelist.add(face);
@@ -71,14 +73,9 @@ public class Function {
 		return facelist;
 	}
 	
-	
 	/*Create a face_set to store face_token*/
-	public static String create_faceset(String Fsname) throws Exception {
+	public String create_faceset(String Fsname) throws Exception {
 		String url = "https://api-cn.faceplusplus.com/facepp/v3/faceset/create";
-		HashMap<String,String> map = new HashMap<String,String>();
-		HashMap<String, byte[]> byteMap = new HashMap<String, byte[]>();
-		map.put("api_key", "LNlB_BzBFjXhK1_p7xRSka2sy2HxvXoq");
-        map.put("api_secret", "SlgEwp14tq4oQ9OJx1h_voC6ijBaTGhi");
         map.put("display_name", Fsname);
         try {
         	byte[] bacd = post(url, map, byteMap);
@@ -87,18 +84,13 @@ public class Function {
         	String fstoken = json.getString("faceset_token");
         	return fstoken;
         }catch (Exception e) {
-        	return null;
+        	return "create_faceset fail";
         }		
 	}
 	
 	/*Delete a face_set*/
-	
-	public static String delete_faceset(String fstoken) throws Exception {
+	public String delete_faceset(String fstoken) throws Exception {
 		String url = "https://api-cn.faceplusplus.com/facepp/v3/faceset/delete";
-		HashMap<String,String> map = new HashMap<String,String>();
-		HashMap<String, byte[]> byteMap = new HashMap<String, byte[]>();
-		map.put("api_key", "LNlB_BzBFjXhK1_p7xRSka2sy2HxvXoq");
-        map.put("api_secret", "SlgEwp14tq4oQ9OJx1h_voC6ijBaTGhi");
         map.put("faceset_token", fstoken);
         map.put("check_empty", "1");
         try {
@@ -106,18 +98,13 @@ public class Function {
         	String str = new String(bacd);
         	return str;
         }catch (Exception e) {
-        	return null;
+        	return "delete_faceset fail";
         }		
 	}
 	
 	/*Add all face_token to the face_set*/
-	
-	public static String addface(String fstoken, String datastr) throws Exception {
+	public String addface(String fstoken, String datastr) throws Exception {
 		String url = "https://api-cn.faceplusplus.com/facepp/v3/faceset/addface";
-		HashMap<String,String> map = new HashMap<String,String>();
-		HashMap<String, byte[]> byteMap = new HashMap<String, byte[]>();
-		map.put("api_key", "LNlB_BzBFjXhK1_p7xRSka2sy2HxvXoq");
-        map.put("api_secret", "SlgEwp14tq4oQ9OJx1h_voC6ijBaTGhi");
         map.put("faceset_token", fstoken);
         List<String> facelist = get_facetoken(datastr);
         for (int i = 0; i < facelist.size(); i++) {
@@ -127,19 +114,15 @@ public class Function {
         		map.remove("face_tokens");
         		String str = new String(bacd);
         	}catch (Exception e) {
-            	return null;
+            	return "add fail";
             }
         }
-        return null;
+        return "add success";
 	}
 	
 	/*Analysis a face according to a face_token*/
-	public static String analysisface(String ftoken) throws Exception {
+	public String analysisface(String ftoken) throws Exception {
 		String url = "https://api-cn.faceplusplus.com/facepp/v3/face/analyze";
-		HashMap<String,String> map = new HashMap<String,String>();
-		HashMap<String, byte[]> byteMap = new HashMap<String, byte[]>();
-		map.put("api_key", "LNlB_BzBFjXhK1_p7xRSka2sy2HxvXoq");
-        map.put("api_secret", "SlgEwp14tq4oQ9OJx1h_voC6ijBaTGhi");
         map.put("face_tokens", ftoken);   
         map.put("return_attributes", "emotion");
         try {
@@ -147,7 +130,7 @@ public class Function {
     		String str = new String(bacd);
     		return str;
     	}catch (Exception e) {
-        	return null;
+        	return "analysisface fail";
     	}
 	}
 	
