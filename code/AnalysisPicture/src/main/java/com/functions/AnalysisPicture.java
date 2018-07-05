@@ -40,12 +40,22 @@ public class AnalysisPicture {
    		String url = "https://api-cn.faceplusplus.com/facepp/v3/detect";
         try{
         	File file = new File(filepath);
+        	if(!file.exists())    
+        	{    
+        	    return "picture not exists!";
+        	}    
           	byte[] buff = getBytesFromFile(file);
         	map.put("return_landmark", "0");
             map.put("return_attributes", "emotion");
             byteMap.put("image_file", buff);
             byte[] bacd = post(url, map, byteMap);
             String str = new String(bacd);
+            System.out.println("xxx");
+            while (str.equals("{\"error_message\":\"CONCURRENCY_LIMIT_EXCEEDED\"}")) {
+            	System.out.println("post again");
+            	bacd = post(url, map, byteMap);
+                str = new String(bacd);
+            }
             return str;
         }catch (Exception e) {
        	 	return "getdata fail";
