@@ -1,26 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Sidebar from './Sidebar';
-import Headbar from './Headbar';
-import Chart from './Chart';
-
+import Home from './Home/Home';
+import Login from './Login/Login';
 import registerServiceWorker from './registerServiceWorker';
 import {Route,HashRouter, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 ReactDOM.render((
 <div >
-	<Headbar />
-	<div className="row">
-		<Sidebar/>
-		<main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-			<HashRouter>
-			  <Switch>
-			  	<Route path="/" component={Chart} />
-			  </Switch>
-			</HashRouter>
-		</main>
-	</div>
+	<HashRouter>
+	  <Switch>
+	  	<Route path="/" component={Login} exact/>
+	  	<Route path="/Home" component={Home} />
+	  </Switch>
+	</HashRouter>
  </div>
 ), document.getElementById('root'));
 registerServiceWorker();
