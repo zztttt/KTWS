@@ -11,9 +11,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 ReactDOM.render((
 <div >
 	<Headbar />
-	<div class="row">
+	<div className="row">
 		<Sidebar/>
-		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+		<main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 			<HashRouter>
 			  <Switch>
 			  	<Route path="/" component={Chart} />
