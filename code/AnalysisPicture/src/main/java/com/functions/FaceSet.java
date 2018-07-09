@@ -11,7 +11,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -22,83 +21,81 @@ import javax.net.ssl.SSLException;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class AnalysisPicture {
-	
+public class FaceSet {
+
 	private final static int CONNECT_TIME_OUT = 30000;
 	private final static int READ_OUT_TIME = 50000;
 	private static String boundaryString = getBoundary();
 	private static HashMap<String, String> map = new HashMap<String, String>();
     private static HashMap<String, byte[]> byteMap = new HashMap<String, byte[]>();
     
-    private static String api_key, api_secret;
-    
-	public AnalysisPicture(String key, String secret){
-		api_key = key;
-		api_secret = secret;
+	public FaceSet(String key, String secret){
+		map.put("api_key", key);
+        map.put("api_secret", secret);
     }
 	
-	private void MapClear() {
-		map.clear();
-		map.put("api_key", api_key);
-        map.put("api_secret", api_secret);
-	}
-	
-   /*Detect the photo and get the face data from the picture*/
-	public String detectByPath(String filepath) throws Exception{
-		MapClear();
-   		String url = "https://api-cn.faceplusplus.com/facepp/v3/detect";
-        try{
-        	File file = new File(filepath);
-        	if(!file.exists())    
-        	{    
-        	    return "picture not exists!";
-        	}
-          	byte[] buff = getBytesFromFile(file);
-        	map.put("return_landmark", "0"); 
-            map.put("return_attributes", "emotion");
-            byteMap.put("image_file", buff);
-            byte[] bacd = post(url, map, byteMap);
-            String str = new String(bacd);
-            // deal with api error "CONCURRENCY_LIMIT_EXCEEDED", detect again
-            while (str.equals("{\"error_message\":\"CONCURRENCY_LIMIT_EXCEEDED\"}")) {
-            	System.out.println("post again");
-            	bacd = post(url, map, byteMap);
-                str = new String(bacd);
-            }
-            return str;
-        }catch (Exception e) {
-       	 	return "getdata fail";
-   		}
-   }
-    
-    /*Count the number of face from the String get from the picture*/
-	public int numOfFace(String datastr) throws Exception {
-		JSONObject json = JSONObject.fromObject(datastr);
-        JSONArray faceset = json.getJSONArray("faces");
-        int number = faceset.size();
-		return number;
-	}	
-	
-	/*Analysis a face according to a face_token*/
-	public String analysisFace(String ftoken) throws Exception {
-		String url = "https://api-cn.faceplusplus.com/facepp/v3/face/analyze";
-        map.put("face_tokens", ftoken);   
-        map.put("return_attributes", "emotion");
+
+	/*Create a face_set to store face_token*/
+	public String create_faceset(String Fsname) throws Exception {
+		String url = "https://api-cn.faceplusplus.com/facepp/v3/faceset/create";
+        map.put("display_name", Fsname);
         try {
-    		byte[] bacd = post(url, map, byteMap);
-    		String str = new String(bacd);
-    		return str;
-    	}catch (Exception e) {
-        	return "analysisface fail";
-    	}
+        	byte[] bacd = post(url, map, byteMap);
+        	String str = new String(bacd);
+        	JSONObject json = JSONObject.fromObject(str);
+        	String fstoken = json.getString("faceset_token");
+        	return fstoken;
+        }catch (Exception e) {
+        	return "create_faceset fail";
+        }		
 	}
 	
-	/* mark picture with face rectangle */ 
-	// warn the parameter should not be file path? or need change to give a array of rectangle
-	public String markPhoto(String filepath, int top, int left, int width, int height ) {
-		//??????? use python
-		return "";
+	/*Delete a face_set*/
+	public String delete_faceset(String fstoken) throws Exception {
+		String url = "https://api-cn.faceplusplus.com/facepp/v3/faceset/delete";
+        map.put("faceset_token", fstoken);
+        map.put("check_empty", "1");
+        try {
+        	byte[] bacd = post(url, map, byteMap);
+        	String str = new String(bacd);
+        	return str;
+        }catch (Exception e) {
+        	return "delete_faceset fail";
+        }		
 	}
+	
+	/*Get all face_token to a faceset*/
+	public List<String> get_facetoken(String datastr) throws Exception {
+		List<String> facelist = new ArrayList<String>();
+		JSONObject json = JSONObject.fromObject(datastr);
+		JSONArray facearray = json.getJSONArray("faces");
+		int number = facearray.size();
+		for (int i = 0; i < number; i++){
+			String face = JSONObject.fromObject(facearray.get(i)).getString("face_token");
+			facelist.add(face);
+		}
+		return facelist;
+	}
+	
+	/*Add all face_token to the face_set*/
+	public String addface(String fstoken, String datastr) throws Exception {
+		String url = "https://api-cn.faceplusplus.com/facepp/v3/faceset/addface";
+        map.put("faceset_token", fstoken);
+        List<String> facelist = get_facetoken(datastr);
+        for (int i = 0; i < facelist.size(); i++) {
+        	map.put("face_tokens", facelist.get(i));
+        	try {
+        		byte[] bacd = post(url, map, byteMap);
+        		map.remove("face_tokens");
+        		String str = new String(bacd);
+        	}catch (Exception e) {
+            	return "add fail";
+            }
+        }
+        return "add success";
+	}
+	
+
 	/*
 	 * this is original
 	 * */
