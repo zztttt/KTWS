@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Sidebar from '../Bars/Sidebar';
+import Headbar from '../Bars/Headbar';
 class Chart extends Component {
   render() {
     return (

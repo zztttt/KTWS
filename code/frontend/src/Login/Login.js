@@ -9,7 +9,7 @@ class Login extends Component {
     }
 	loginbtn(){
 		var path = {
-			  pathname:'/Home',
+			  pathname:'/Hello',
 			}
 		this.props.history.push(path);
 	}
@@ -17,7 +17,7 @@ class Login extends Component {
     return (
 		<form action="login.php" method="post">
             <div className="mycenter">
-	            <div className="mysign">
+	            <form className="mysign" action="/user/login" method="post">
 	                <div className="col-lg-11 text-center text-info">
 	                    <h2>请登录</h2>
 	                </div>
@@ -36,7 +36,7 @@ class Login extends Component {
 	                <div className="col-lg-10">
 	                    <button type="button" className="btn btn-success col-lg-12" onClick={this.loginbtn}>登录</button>
 	                </div>
-	            </div>
+	            </form>
 	        </div>
         </form>	
     );
