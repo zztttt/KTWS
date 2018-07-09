@@ -46,7 +46,7 @@ class Hello extends Component {
           <Sidebar />
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-              <ReactHighcharts config={config}></ReactHighcharts>
+              <ReactHighcharts> config={config}></ReactHighcharts>
             </div>
           </main>
         </div>
