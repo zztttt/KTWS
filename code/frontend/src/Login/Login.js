@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import './Login.css';
+import PropTypes from 'prop-types';
+
 class Login extends Component {
+	static contextTypes={
+    	router:PropTypes.object
+  	}
 	constructor(props) {
         super(props);
         this.state = {
@@ -8,11 +13,10 @@ class Login extends Component {
         this.loginbtn=this.loginbtn.bind(this);
     }
 	loginbtn(){
-		var path = {
-			  pathname:'/Hello',
-			}
-		this.props.history.push(path);
-	}
+      	this.context.router.history.push('/Hello');
+    }
+	
+	
     render() {
     return (
 		<form action="login.php" method="post">

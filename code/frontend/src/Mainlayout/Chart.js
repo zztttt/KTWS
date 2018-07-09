@@ -4,7 +4,13 @@ import Headbar from '../Bars/Headbar';
 class Chart extends Component {
   render() {
     return (
-      <div className="table-responsive">
+      <div>
+        <Headbar />
+        <div className="row">
+          <Sidebar />
+          <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div>
+              <div className="table-responsive">
             <table className="table table-striped table-sm">
               <thead>
                 <tr>
@@ -131,6 +137,11 @@ class Chart extends Component {
               </tbody>
             </table>
           </div>
+            </div>
+          </main>
+        </div>
+      </div>
+      
     );
   }
 }
