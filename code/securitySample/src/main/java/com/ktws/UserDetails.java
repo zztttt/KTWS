@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 public interface UserDetails extends Serializable{
 	// 封装了权限信息
     Collection<? extends GrantedAuthority> getAuthorities();
-    // 密码信息
+    // 密码信息	
     String getPassword();
     // 登录用户名
     String getUsername();
