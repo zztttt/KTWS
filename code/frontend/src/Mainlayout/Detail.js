@@ -4,9 +4,6 @@ import Headbar from '../Bars/Headbar';
 import '../Bars/Sidebar.css';
 
 class Detail extends Component {
-  constructor(){
-    super(props);
-  }
   render() {
     return (
       <div>
