@@ -21,6 +21,10 @@
     "popper": "^1.0.1",
     "popper.js": "^1.14.3",
     "react-bootstrap": "^0.32.1",
+<<<<<<< HEAD
     "react-bootstrap-table": "^4.3.1"
+=======
+    "react-highcharts": "^16.0.2"
+>>>>>>> 389cf3b2eeb2a8eba9d1778688672ae51850fbae
   }
 }
