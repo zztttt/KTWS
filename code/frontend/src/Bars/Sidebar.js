@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import './Sidebar.css';
-import Hello from '../Mainlayout/Hello';
-import Chart from '../Mainlayout/Chart';
-import Statistics from '../Mainlayout/Statistics';
-import Login from '../Login/Login';
-import {Route,HashRouter, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 class Sidebar extends Component {
   static contextTypes={
@@ -12,7 +7,7 @@ class Sidebar extends Component {
   }
   constructor(props) {
         super(props);
-    }
+  }
   render() {
     return (
       <nav className="col-md-2 d-none d-md-block bg-light sidebar">

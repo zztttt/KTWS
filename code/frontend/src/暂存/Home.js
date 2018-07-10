@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Sidebar from './Sidebar';
-import Headbar from './Headbar';
+import Sidebar from '../Bars/Sidebar';
+import Headbar from '../Bars/Headbar';
 import Chart from './Chart';
 import Hello from './Hello';
 import Statistics from './Statistics'
@@ -12,18 +12,16 @@ class Home extends Component {
       <div>
         <Headbar />
         <div className="row">
-          <Sidebar>
+          <Sidebar />
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <HashRouter>
-              <Switch>
-                <Route exact path="/Home/" component={Hello} />
-                <Route path="/Home/Chart" component={Chart} />
-                <Route path="/Home/Login" component={Login} />
-                <Route path="/Home/Statistics" component={Statistics} />
-              </Switch>
-            </HashRouter>
+              <HashRouter>
+                <Switch>
+                  <Route path="/" component={Hello} exact/>
+                  <Route path="/Chart" component={Chart} />
+                  <Route path="/Statistics" component={Statistics} />
+                </Switch>
+              </HashRouter>
           </main>
-          </Sidebar>
         </div>
       </div>
     );

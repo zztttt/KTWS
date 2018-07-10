@@ -1,6 +1,47 @@
 import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+var classes = [{
+      id: 1,
+      classname: "class1",
+      num: 120,
+      frequency: 5,
+      open:'Y'
+  }, {
+      id: 2,
+      classname: "class2",
+      num: 8,
+      frequency: 20,
+      open:'N'
+  }];
+const FrequencyTypes=[5,10,15,20];
+class Table extends React.Component {
+
+  render() {
+
+    const cellEditProp = {
+
+    mode: 'dbclick',
+
+    };
+
+    return (
+
+      <BootstrapTable data={ classes } cellEdit={ cellEditProp } insertRow={ true } striped={ true } search={ true } version='4'>
+
+      <TableHeaderColumn dataField='id'  width={'10%'} isKey={ true }>课程号</TableHeaderColumn>
+      <TableHeaderColumn dataField='classname'  width={'10%'}>课程名</TableHeaderColumn>
+      <TableHeaderColumn dataField='num'  width={'10%'}>总人数</TableHeaderColumn>
+      <TableHeaderColumn dataField='frequency' editable={ { type: 'select', options:{ values: FrequencyTypes }}}  width={'10%'}>拍照频率（秒）</TableHeaderColumn>
+      <TableHeaderColumn dataField='open' editable={ { type: 'checkbox', options: { values: 'Y:N' } } } width={'10%'}>开启</TableHeaderColumn>
+      </BootstrapTable>
+
+    );
+
+  }
+
+}
 class Chart extends Component {
   render() {
     return (
@@ -10,133 +51,7 @@ class Chart extends Component {
           <Sidebar />
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-              <div className="table-responsive">
-            <table className="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              <Table/>
             </div>
           </main>
         </div>
