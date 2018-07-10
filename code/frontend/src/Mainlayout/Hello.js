@@ -3,7 +3,6 @@ import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 import '../Bars/Sidebar.css';
 var ReactHighcharts = require('react-highcharts');
-var Highcharts = require('highcharts');
 
 var config = {
   title: {
@@ -46,7 +45,7 @@ class Hello extends Component {
           <Sidebar />
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-              <ReactHighcharts> config={config}></ReactHighcharts>
+              <ReactHighcharts config={config}></ReactHighcharts>
             </div>
           </main>
         </div>

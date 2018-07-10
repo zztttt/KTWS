@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 var ReactHighcharts = require('react-highcharts');
-var Highcharts = require('highcharts');
 
 var config = {
   title: {
