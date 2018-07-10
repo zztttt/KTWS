@@ -10,7 +10,7 @@ var classes = [{
       open:'Y'
   }, {
       id: 2,
-      classname: "class2",
+      classname: "class2", 
       num: 8,
       frequency: 20,
       open:'N'
