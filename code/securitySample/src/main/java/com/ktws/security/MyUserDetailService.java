@@ -1,4 +1,4 @@
-package com.ktws;
+package com.ktws.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailService implements UserDetailsService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
