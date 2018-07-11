@@ -32,8 +32,8 @@ function Content(){
       <div className="col-lg-5">
         <h2>课程名称：</h2>
         <h2>aaa</h2>
-        <BootstrapTable data={ classes }  striped={ true } pagination={true} search={ true } version='4'>
-          <TableHeaderColumn dataField='time' align='center' width={'100%'} isKey={ true }>时间</TableHeaderColumn>
+        <BootstrapTable data={ classes }  align={"center"} striped={ true } pagination={true} search={ true } version='4'>
+          <TableHeaderColumn dataField='time' align={"center"} width={'100%'} isKey={ true }>时间</TableHeaderColumn>
         </BootstrapTable>
       </div>
       <img src="http://3.pic.paopaoche.net/thumb/up/2018-2/201802091125424599775_600_0.png" alt="" className="col-lg-7"/>
