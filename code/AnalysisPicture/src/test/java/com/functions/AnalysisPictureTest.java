@@ -16,7 +16,7 @@ import net.sf.json.JSONObject;
 
 public class AnalysisPictureTest extends TestCase {
 	
-	protected AnalysisPicture ap = new AnalysisPicture("pjvZCfFaVo3rW3GwUahcbl1vGjc2O8DP", "bdepZ25FXgP9WXcURlfYpBPbxVFY3qEx");;
+	protected AnalysisPicture ap = new AnalysisPicture("pjvZCfFaVo3rW3GwUahcbl1vGjc2O8DP", "bdepZ25FXgP9WXcURlfYpBPbxVFY3qEx");
 	protected String thisPath = AnalysisPictureTest.class.getClass().getResource("/").getPath(); // \E:\SummerProject\workspace\analysisPhoto\target\test-classes
 	
 	@Test

@@ -192,7 +192,9 @@ public class AnalysisPicture {
 			return "no face found in mark photo";
 		
 		// arguments for python cmd line
-		String args = "python E:\\SummerProject\\pycode\\markPicture.py "; // py code path
+		String args = "python D:\\markPicture.py "; // py code path
+		String codepath = AnalysisPicture.class.getResource("/").getPath();
+		//System.out.println(codepath);
 		args += filepath; // file path with file name
 		for (int i=0; i<count; i++) {
 			JSONObject face = JSONObject.fromObject(faceset.get(i));
