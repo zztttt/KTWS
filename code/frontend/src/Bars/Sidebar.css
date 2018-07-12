@@ -63,6 +63,7 @@ body {
 /*
  * Navbar
  */
+<<<<<<< HEAD
 .nav-item {
     left: 4px;
 }
@@ -78,6 +79,13 @@ body {
   padding-left: 16px;
   padding-bottom: .75rem;
   font-size: 1.8rem;
+=======
+
+.navbar .navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 2rem;
+>>>>>>> 1db2bcd76cc9658f4134c4c462d9f311ea27fb86
   background-color: rgba(0, 0, 0, .25);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
 }
@@ -86,6 +94,13 @@ body {
   padding: .75rem 1rem;
   border-width: 0;
   border-radius: 0;
+}
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 0px;
+  border: 1px solid transparent;
 }
 
 .form-control-dark {
