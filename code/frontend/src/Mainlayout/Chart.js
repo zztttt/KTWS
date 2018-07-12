@@ -17,30 +17,27 @@ var classes = [{
   }];
 const FrequencyTypes=[5,10,15,20];
 class Table extends React.Component {
+  constructor(props){
+    super(props);
+    this.getchart=this.getchart.bind(this);
+  }
+  getchart(){
 
+  }
   render() {
-
     const cellEditProp = {
-
-    mode: 'dbclick',
-
+      mode: 'dbclick',
     };
-
     return (
-
-      <BootstrapTable data={ classes } cellEdit={ cellEditProp } insertRow={ true } striped={ true } search={ true } version='4'>
-
+      <BootstrapTable data={ classes } cellEdit={ cellEditProp } striped={ true } search={ true } version='4'>
       <TableHeaderColumn dataField='id'  width={'10%'} isKey={ true }>课程号</TableHeaderColumn>
       <TableHeaderColumn dataField='classname'  width={'10%'}>课程名</TableHeaderColumn>
       <TableHeaderColumn dataField='num'  width={'10%'}>总人数</TableHeaderColumn>
       <TableHeaderColumn dataField='frequency' editable={ { type: 'select', options:{ values: FrequencyTypes }}}  width={'10%'}>拍照频率（秒）</TableHeaderColumn>
       <TableHeaderColumn dataField='open' editable={ { type: 'checkbox', options: { values: 'Y:N' } } } width={'10%'}>开启</TableHeaderColumn>
       </BootstrapTable>
-
     );
-
   }
-
 }
 class Chart extends Component {
   render() {

@@ -3,7 +3,7 @@ import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 var ReactHighcharts = require('react-highcharts');
 
-var config = {
+var config1 = {
   title: {
     text: '每日上课听讲人数'
   },
@@ -35,7 +35,41 @@ var config = {
       data: [5,4,8,10,9,3,7]
     }],
 }
+const config2 = {
+      title: {text: '每日上课专注度比例'},
+      subtitle: {text: '课堂威视'},
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
+            style: {
+               color: (ReactHighcharts.theme && ReactHighcharts.theme.contrastTextColor) || 'black'
+            }
+          }
+        }
+      },
+      series: [{
+        type: 'pie',
+        name: 'Browser share',
+        data: [
+          ['0.5以下',   35.0],
+          ['0.5 ~ 0.7',  28],
+          ['0.7 ~ 0.9',  22],
+          ['0.9 ~ 1',   12]
+        ]
+      }],
+    } 
 class Statistics extends Component {
+  constructor(props){
+    super(props);
+    this.getstatistics=this.getstatistics.bind(this);
+  }
+  getstatistics(){
+
+  }
   render() {
     return (
       <div>
@@ -44,7 +78,7 @@ class Statistics extends Component {
           <Sidebar />
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-              <ReactHighcharts config={config}></ReactHighcharts>
+              <Content/>
             </div>
           </main>
         </div>
@@ -52,5 +86,27 @@ class Statistics extends Component {
     );
   }
 }
-
+function Content(){
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-5">
+          <ReactHighcharts config={config1}></ReactHighcharts>
+        </div>
+        <div className="col-lg-5">
+          <ReactHighcharts config={config2}></ReactHighcharts>
+        </div>
+      </div>
+      
+      <div className="row">
+        <div className="col-lg-5">
+          <ReactHighcharts config={config1}></ReactHighcharts>
+        </div>
+        <div className="col-lg-5">
+          <ReactHighcharts config={config2}></ReactHighcharts>
+        </div>
+      </div>
+    </div>
+  );
+}
 export default Statistics;

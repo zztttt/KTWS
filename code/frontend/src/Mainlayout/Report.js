@@ -4,6 +4,13 @@ import Headbar from '../Bars/Headbar';
 import '../Bars/Sidebar.css';
 
 class Report extends Component {
+  constructor(props){
+    super(props);
+    this.getreport=this.getreport.bind(this);
+  }
+  getreport(){
+
+  }
   render() {
     return (
       <div>
