@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
+
+import {Panel} from 'react-bootstrap';
 var ReactHighcharts = require('react-highcharts');
 
 var config1 = {
@@ -88,24 +90,37 @@ class Statistics extends Component {
 }
 function Content(){
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-5">
-          <ReactHighcharts config={config1}></ReactHighcharts>
-        </div>
-        <div className="col-lg-5">
-          <ReactHighcharts config={config2}></ReactHighcharts>
-        </div>
-      </div>
-      
-      <div className="row">
-        <div className="col-lg-5">
-          <ReactHighcharts config={config1}></ReactHighcharts>
-        </div>
-        <div className="col-lg-5">
-          <ReactHighcharts config={config2}></ReactHighcharts>
-        </div>
-      </div>
+    <div>
+      <Panel bsStyle="info">
+        <Panel.Heading>
+          <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+        </Panel.Heading>
+        <Panel.Body>
+          <div className="row">
+            <div className="col-lg-5">
+              <ReactHighcharts config={config1}></ReactHighcharts>
+            </div>
+            <div className="col-lg-5">
+              <ReactHighcharts config={config2}></ReactHighcharts>
+            </div>
+          </div>
+        </Panel.Body>
+      </Panel>
+      <Panel bsStyle="info">
+        <Panel.Heading>
+          <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+        </Panel.Heading>
+        <Panel.Body>
+          <div className="row">
+            <div className="col-lg-5">
+              <ReactHighcharts config={config1}></ReactHighcharts>
+            </div>
+            <div className="col-lg-5">
+              <ReactHighcharts config={config2}></ReactHighcharts>
+            </div>
+          </div>
+        </Panel.Body>
+      </Panel>
     </div>
   );
 }

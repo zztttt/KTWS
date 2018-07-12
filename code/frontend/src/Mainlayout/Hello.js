@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 import '../Bars/Sidebar.css';
+import {Panel} from 'react-bootstrap';
+
 var ReactHighcharts = require('react-highcharts');
 
 var config = {
@@ -44,9 +46,14 @@ class Hello extends Component {
         <div className="row">
           <Sidebar />
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div>
-              <ReactHighcharts config={config}></ReactHighcharts>
-            </div>
+            <Panel bsStyle="info">
+              <Panel.Heading>
+                <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+              </Panel.Heading>
+              <Panel.Body>
+                <ReactHighcharts config={config}></ReactHighcharts>
+              </Panel.Body>
+            </Panel>
           </main>
         </div>
       </div>
