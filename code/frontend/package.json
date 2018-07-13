@@ -6,7 +6,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "react-highcharts": "^16.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -20,6 +21,7 @@
     "jquery": "^3.3.1",
     "popper": "^1.0.1",
     "popper.js": "^1.14.3",
-    "react-bootstrap": "^0.32.1"
+    "react-bootstrap": "^0.32.1",
+    "react-bootstrap-table": "^4.3.1"
   }
 }

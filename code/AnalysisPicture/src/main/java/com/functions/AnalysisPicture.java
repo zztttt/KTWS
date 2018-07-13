@@ -1,11 +1,13 @@
 package com.functions;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -43,14 +45,15 @@ public class AnalysisPicture {
         map.put("api_secret", api_secret);
 	}
 	
-   /*Detect the photo and get the face data from the picture*/
+   /* Detect the photo and get the face data from the picture*/
 	public String detectByPath(String filepath) throws Exception{
 		MapClear();
+		//System.out.println("in detect, path "+filepath);
    		String url = "https://api-cn.faceplusplus.com/facepp/v3/detect";
         try{
         	File file = new File(filepath);
         	if(!file.exists())    
-        	{    
+        	{
         	    return "picture not exists!";
         	}
           	byte[] buff = getBytesFromFile(file);
@@ -59,8 +62,10 @@ public class AnalysisPicture {
             byteMap.put("image_file", buff);
             byte[] bacd = post(url, map, byteMap);
             String str = new String(bacd);
+            
             // deal with api error "CONCURRENCY_LIMIT_EXCEEDED", detect again
             while (str.equals("{\"error_message\":\"CONCURRENCY_LIMIT_EXCEEDED\"}")) {
+            	// console print to debug
             	System.out.println("post again");
             	bacd = post(url, map, byteMap);
                 str = new String(bacd);
@@ -72,18 +77,19 @@ public class AnalysisPicture {
    }
     
     /*Count the number of face from the String get from the picture*/
-	public int numOfFace(String datastr) throws Exception {
-		JSONObject json = JSONObject.fromObject(datastr);
+	public int numOfFace(String detectStr) throws Exception {
+		JSONObject json = JSONObject.fromObject(detectStr);
         JSONArray faceset = json.getJSONArray("faces");
         int number = faceset.size();
 		return number;
 	}	
 	
 	/*Analysis a face according to a face_token*/
-	public String analysisFace(String ftoken) throws Exception {
+	// should not be a face, should analysis all face 
+	public String analysisFaceByTokens(String facetoken) throws Exception {
 		String url = "https://api-cn.faceplusplus.com/facepp/v3/face/analyze";
-        map.put("face_tokens", ftoken);   
-        map.put("return_attributes", "emotion");
+        map.put("face_tokens", facetoken);   
+        map.put("return_attributes", "eyestatus,emotion");
         try {
     		byte[] bacd = post(url, map, byteMap);
     		String str = new String(bacd);
@@ -93,11 +99,132 @@ public class AnalysisPicture {
     	}
 	}
 	
-	/* mark picture with face rectangle */ 
-	// warn the parameter should not be file path? or need change to give a array of rectangle
-	public String markPhoto(String filepath, int top, int left, int width, int height ) {
-		//??????? use python
-		return "";
+	/*Analysis all face according to detect string */
+	public String analysisFaceAll(String detectStr) throws Exception {
+		JSONObject detectJson = JSONObject.fromObject(detectStr);
+		JSONArray faceset = detectJson.getJSONArray("faces");
+		int count = faceset.size();
+		if (count==0)
+			return "no face found in analysis all";
+		
+		int concentrate = 0;
+		
+		// face number <= 5
+		if (count <= 5) {
+			for (int i=0; i<count; i++) {
+				JSONObject face = JSONObject.fromObject(faceset.get(i));
+				JSONObject attributes = (JSONObject)face.get("attributes");
+				String oneEmotion = attributes.get("emotion").toString();
+				if (emotionDeal(oneEmotion)) {
+					concentrate += 1;
+				}
+			}
+		}
+		else { // face number > 5
+			// list to store face token
+			List<String> tokenList = new ArrayList<String>();
+			for (int i=0; i<count; i++) {
+				JSONObject face = JSONObject.fromObject(faceset.get(i));
+				String oneToken = face.get("face_token").toString();
+				//System.out.println(oneToken);
+				tokenList.add(oneToken);
+			}
+
+			String tokens = "";
+			for (int i=0; i<count; i++) {
+				if (i % 5 != 0) tokens += ",";
+				tokens += tokenList.get(i);
+				if (((i+1) % 5 == 0) || ((i+1) == count)) {
+					// deal with analysis return value
+					String analysisStr = analysisFaceByTokens(tokens);
+					JSONObject analysisJson = JSONObject.fromObject(analysisStr);
+					JSONArray analysisArray = analysisJson.getJSONArray("faces");
+					int analysisCount = analysisArray.size();
+					for (int j=0; j<analysisCount; j++) {
+						JSONObject face = JSONObject.fromObject(analysisArray.get(j));
+						JSONObject attributes = (JSONObject)face.get("attributes");
+						String oneEmotion = attributes.get("emotion").toString();
+						if (emotionDeal(oneEmotion)) {// judge emotion
+							concentrate += 1;
+						}
+					}
+					// refresh tokens
+					tokens = "";
+				}
+			}
+		}
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("total", count);
+		map.put("concentrate", concentrate);
+		JSONObject res = JSONObject.fromObject(map);
+		return res.toString();
+	}
+	
+	private boolean emotionDeal(String emotion) {
+		JSONObject emotionJson = JSONObject.fromObject(emotion);
+		double sadness = Double.parseDouble(emotionJson.getString("sadness"));
+		double neutral = Double.parseDouble(emotionJson.getString("neutral"));
+		double disgust = Double.parseDouble(emotionJson.getString("disgust"));
+		double anger = Double.parseDouble(emotionJson.getString("anger"));
+		double surprise = Double.parseDouble(emotionJson.getString("surprise"));
+		double fear = Double.parseDouble(emotionJson.getString("fear"));
+		double happiness = Double.parseDouble(emotionJson.getString("happiness"));
+		
+		double flag = 2*happiness + 2*surprise + neutral - 0.6*sadness - 0.6*fear - 0.4*disgust - 0.4*anger;
+		if (flag > 0.7)
+			return true;
+		else 
+			return false;
+	}
+	
+	/* mark picture with face rectangle using python pillow */ 
+	public String markPhoto(String filepath, String detectStr) {
+		/* .class.getClass().getResource("/").getPath() 得到的路径最前面有一个斜杠(??why)，会出现问题，去除之 */
+		if (filepath.charAt(0) == '\\' || filepath.charAt(0) == '/') {
+			//System.out.println("mark in remove");
+			filepath = filepath.substring(1, filepath.length());
+			//System.out.println("NEW : "+filepath);
+		}
+		JSONObject detectJson = JSONObject.fromObject(detectStr);
+		JSONArray faceset = detectJson.getJSONArray("faces");
+		int count = faceset.size();
+		if (count==0)
+			return "no face found in mark photo";
+		
+		// arguments for python cmd line
+		String args = "python D:\\markPicture.py "; // py code path
+		String codepath = AnalysisPicture.class.getResource("/").getPath();
+		//System.out.println(codepath);
+		args += filepath; // file path with file name
+		for (int i=0; i<count; i++) {
+			JSONObject face = JSONObject.fromObject(faceset.get(i));
+			JSONObject rectangle = (JSONObject)face.get("face_rectangle");
+        	int top = Integer.parseInt(rectangle.get("top").toString());
+    		int left = Integer.parseInt(rectangle.get("left").toString());
+    		int width = Integer.parseInt(rectangle.get("width").toString());
+    		//int height = Integer.parseInt(rectangle.get("height").toString());
+        	args += " "+left+" "+top+" "+width;
+		}
+
+		//System.out.println(args);
+    	
+    	try {
+    		Process proc = Runtime.getRuntime().exec(args);
+    		BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+    		String line = null;
+    		while ((line = in.readLine()) != null) {
+    			System.out.println(line);
+    		}
+    		in.close();
+	        int code = proc.waitFor();
+	        
+	        //System.out.println("hhhh code: "+ code);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return "mark fail";
+    	}
+		
+		return "mark ok";
 	}
 	/*
 	 * this is original

@@ -56,14 +56,34 @@ body {
   text-transform: uppercase;
 }
 
+
+[role="main"] {
+  padding-top: 0px; /* Space for fixed navbar */
+}
 /*
  * Navbar
  */
+.nav-item {
+    left: 4px;
+}
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 0px;
+  border: 1px solid transparent;
+}
+.navbar .navbar-brand {
+  box-sizing: border-box;
+  padding-top: 10px;
+  padding-left: 16px;
+  padding-bottom: .75rem;
+  font-size: 1.8rem;
+}
 
-.navbar-brand {
+.navbar .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;
-  font-size: 1rem;
+  font-size: 2rem;
   background-color: rgba(0, 0, 0, .25);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
 }
@@ -72,6 +92,13 @@ body {
   padding: .75rem 1rem;
   border-width: 0;
   border-radius: 0;
+}
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 0px;
+  border: 1px solid transparent;
 }
 
 .form-control-dark {
