@@ -102,7 +102,7 @@ function Content(){
         </Panel.Heading>
         <Panel.Body>
           <BootstrapTable  className="col-lg-6" data={ classes }  align={"center"} striped={ true } pagination={true} search={ true } version='4'>
-            <TableHeaderColumn dataField='time' align={"center"} width={'100%'} isKey={ true }>时间</TableHeaderColumn>
+            <TableHeaderColumn dataField='time' headerAlign='center' dataAlign='center' width={'100%'} isKey={ true }>时间</TableHeaderColumn>
           </BootstrapTable>
           <img src="http://3.pic.paopaoche.net/thumb/up/2018-2/201802091125424599775_600_0.png" alt="" className="col-lg-6"/>
         </Panel.Body>

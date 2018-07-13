@@ -39,12 +39,22 @@ var config = {
     }],
 }
 class Hello extends Component {
+  constructor(){
+    this.state = {
+      username:null
+    };
+    this.serverRequest = $.get("/getusername",function(data){
+      this.setState({
+           username: JSON.parse(data),
+        });
+    }.bind(this));
+  }
   render() {
     return (
       <div>
         <Headbar />
         <div className="row">
-          <Sidebar />
+          <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <Panel bsStyle="info">
               <Panel.Heading>
