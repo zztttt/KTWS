@@ -14,10 +14,11 @@ import org.springframework.stereotype.Service;
 
 import com.ktws.Dao.UserDao;
 
-import com.ktws.Entity.MyUser;
+import com.ktws.Entity.AuthUser;
+import com.ktws.Entity.User;
 //import org.springframework.security.core.userdetails.User;
 
-@Service
+@Component
 public class MyUserDetailsService implements UserDetailsService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
@@ -31,11 +32,16 @@ public class MyUserDetailsService implements UserDetailsService {
         // 封装用户信息，并返回。参数分别是：用户名，密码，用户权限
         //User user = new User(username, "123456",AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
         //return user;
-        MyUser user = userdao.findByName(username);
+        User user = userdao.findByName(username);
         System.out.printf("user_name: %s\n", user.getUsername());
         if( user == null ){
-            throw new UsernameNotFoundException(String.format("User with username=%s was not found", username));
+        	throw new UsernameNotFoundException("User not found for name:"+username);
         }
-        return user;
+        return new AuthUser(user);
     }
+    /*public String getAuthorityByLoginId(String loginId ){
+    	//Map<String,String> authKindMap = new HashMap<String,String>();
+    	String auth = userdao.selectAuthorityByLoginId(loginId); 
+    	return auth;
+    	}*/
 }

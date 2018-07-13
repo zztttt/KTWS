@@ -1,8 +1,10 @@
 package com.ktws.Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,49 +15,56 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity(name="user")
-public class MyUser implements Serializable, UserDetails {
-	/**
-	 * 
-	 */
+public class AuthUser implements UserDetails {
 	private static final long serialVersionUID = 5540743066245128089L;
-	@Id  
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	
 	private int id;
 	private String password;
 	private String role;
 	private String username;
-	public MyUser(){}
+	public AuthUser(){}
 
-    public MyUser(String username, String password, String  role){
-
-        this.setUsername(username);
-        this.setPassword(password);
-        this.setRole(role);
-
+    public AuthUser(User user){
+    	super();
+    	this.setId(user.getId());
+        this.setUsername(user.getUsername());
+        this.setPassword(user.getPassword());
+        this.setRole(user.getRole());
+        
     }
-	public String getPassword() {
-		return password;
-	}
+    public void setId(int id) {
+    	this.id = id;
+    }
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public String getRole() {
-		return role;
 	}
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public String getUsername() {
-		return username;
-	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public int getId() {
+    	return id;
+    }
+	
+	public String getRole() {
+		return role;
+	}
+	
+	@Override
+	public String getPassword() {
+		return password;
+	}
+	@Override
+	public String getUsername() {
+		return username;
+	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return Arrays.asList(new SimpleGrantedAuthority(getRole()));
+		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+		list.add(new SimpleGrantedAuthority(role));
+		return list;
 	}
 	@Override
 	public boolean isAccountNonExpired() {

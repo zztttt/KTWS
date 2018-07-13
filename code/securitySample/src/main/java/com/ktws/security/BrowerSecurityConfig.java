@@ -16,8 +16,6 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	MyUserDetailsService userDetailsService;
@@ -52,10 +50,10 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
             .and()
             .csrf().disable();          // 关闭csrf防护
 	}*/
-	/*@Bean
+	@Bean
 	public static NoOpPasswordEncoder passwordEncoder() {
 	  return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-	}*/
+	}
 	@Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {

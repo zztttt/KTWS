@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.ktws.Entity.MyUser;
+import com.ktws.Entity.User;
 
-public interface UserDao extends JpaRepository<MyUser, Long> {
+public interface UserDao extends JpaRepository<User, Long> {
 
-	List<MyUser> findAll();
+	List<User> findAll();
 
 	@Query("select u from user u where u.username=?1 and u.password=?2")
-	MyUser findUser(String username, String password);
+	User findUser(String username, String password);
 	
 	@Query("select u from user u where u.username=?1")
-	MyUser findByName(String username);
+	User findByName(String username);
 }
