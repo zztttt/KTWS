@@ -15,9 +15,9 @@ class Sidebar extends Component {
             <ul className="nav flex-column">
               <li className="nav-item">
                 <a className="nav-link active" onClick={function(){
-                  var path = {
-                    pathname: '/Hello',
-                    username: this.props.username,
+                  var path = {  
+                    pathname: '/Hello', 
+                    username:this.state.username, 
                   }
                   this.context.router.history.push(path);
                 }.bind(this)}>
@@ -27,9 +27,9 @@ class Sidebar extends Component {
               </li>
               <li className="nav-item">
                 <a className="nav-link" onClick={function(){
-                  var path = {
-                    pathname: '/Chart',
-                    username: this.props.username,
+                  var path = {  
+                    pathname: '/Chart', 
+                    username:this.state.username, 
                   }
                   this.context.router.history.push(path);
                 }.bind(this)}>
@@ -39,9 +39,9 @@ class Sidebar extends Component {
               </li>
               <li className="nav-item">
                 <a className="nav-link" onClick={function(){
-                  var path = {
-                    pathname: '/Statistics',
-                    username: this.props.username,
+                  var path = {  
+                    pathname: '/Statistics', 
+                    username:this.state.username, 
                   }
                   this.context.router.history.push(path);
                 }.bind(this)} >
@@ -51,9 +51,9 @@ class Sidebar extends Component {
               </li>
               <li className="nav-item">
                 <a className="nav-link" onClick={function(){
-                  var path = {
-                    pathname: '/Report',
-                    username: this.props.username,
+                  var path = {  
+                    pathname: '/Report', 
+                    username:this.state.username, 
                   }
                   this.context.router.history.push(path);
                 }.bind(this)}>

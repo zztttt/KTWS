@@ -65,7 +65,7 @@ class Chart extends Component {
           <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-              <Table/>
+              <Table username={this.state.username}/>
             </div>
           </main>
         </div>
