@@ -33,8 +33,8 @@ public class MyUserDetailsService implements UserDetailsService {
         //User user = new User(username, "123456",AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
         //return user;
         User user = userdao.findByName(username);
-        System.out.printf("user_name: %s\n", user.getUsername());
         if( user == null ){
+        	logger.info("username not found");
         	throw new UsernameNotFoundException("User not found for name:"+username);
         }
         return new AuthUser(user);
