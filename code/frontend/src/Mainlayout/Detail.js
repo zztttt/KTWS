@@ -67,6 +67,11 @@ const config2 = {
 class Detail extends Component {
   constructor(props){
     super(props);
+    var passeddata = this.props.location.username;
+    var username = passeddata;
+    this.state = {
+      username:username,
+    };
     this.getdetail=this.getdetail.bind(this);
   }
   getdetail(){
@@ -77,7 +82,7 @@ class Detail extends Component {
       <div>
         <Headbar className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"/>
         <div className="row">
-          <Sidebar className="col-md-2 d-none d-md-block bg-light sidebar"/>
+          <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
                 <Content/>

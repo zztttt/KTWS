@@ -47,7 +47,7 @@ class Hello extends Component {
     };
     this.serverRequest = $.get("/getusername",function(data){
       this.setState({
-           username: JSON.parse(data),
+           username: JSON.parse(data).username
         });
     }.bind(this));
   }

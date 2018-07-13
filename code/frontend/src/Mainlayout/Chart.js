@@ -20,10 +20,6 @@ var classes = [{
 class Table extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      classes: null,
-      username:null,
-    };
     this.getchart=this.getchart.bind(this);
     this.getchart();
 
@@ -36,9 +32,9 @@ class Table extends React.Component {
     })
   }
   render() {
-    const cellEditProp = {
+    /*const cellEditProp = {
       mode: 'dbclick',
-    };
+    };*/
     return (
       <BootstrapTable data={ classes } /*cellEdit={ cellEditProp }*/ striped={ true } search={ true } version='4'>
       <TableHeaderColumn dataField='id'  width={'10%'} isKey={ true }>课程号</TableHeaderColumn>
@@ -52,12 +48,21 @@ class Table extends React.Component {
   }
 }
 class Chart extends Component {
+  constructor(props){
+    super(props);
+    var passeddata = this.props.location.username;
+    var username = passeddata;
+    this.state = {
+      classes: null,
+      username:username,
+    };
+  }
   render() {
     return (
       <div>
         <Headbar />
         <div className="row">
-          <Sidebar />
+          <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
               <Table/>

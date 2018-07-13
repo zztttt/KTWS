@@ -67,6 +67,11 @@ const config2 = {
 class Statistics extends Component {
   constructor(props){
     super(props);
+    var passeddata = this.props.location.username;
+    var username = passeddata;
+    this.state = {
+      username:username,
+    };
     this.getstatistics=this.getstatistics.bind(this);
   }
   getstatistics(){
@@ -77,7 +82,7 @@ class Statistics extends Component {
       <div>
         <Headbar />
         <div className="row">
-          <Sidebar />
+          <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
               <Content/>
