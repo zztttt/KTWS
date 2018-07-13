@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 ReactDOM.render((
 	<HashRouter>
       <Switch>
-        <Route path="/" component={Detail} exact/>
+        <Route path="/" component={Hello} exact/>
         <Route path="/Hello" component={Hello} />
         <Route path="/Chart" component={Chart} />
         <Route path="/Statistics" component={Statistics} />
