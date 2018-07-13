@@ -3,6 +3,7 @@ import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 import '../Bars/Sidebar.css';
 import {Panel} from 'react-bootstrap';
+import $ from 'jquery';
 
 var ReactHighcharts = require('react-highcharts');
 
@@ -39,7 +40,8 @@ var config = {
     }],
 }
 class Hello extends Component {
-  constructor(){
+  constructor(props){
+    super(props);
     this.state = {
       username:null
     };

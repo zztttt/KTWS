@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 import $ from 'jquery';
-import {Button} from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 var classes = [{
       id: 1,
