@@ -17,6 +17,11 @@ public class Photo {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Id  
+	@Column(name="photo_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
 	private String url;
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)

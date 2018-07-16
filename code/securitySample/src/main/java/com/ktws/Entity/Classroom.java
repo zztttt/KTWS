@@ -22,7 +22,7 @@ public class Classroom {
 	private String location;
 	private int shot_interval;
 	
-	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="Classroom")  
+	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="classroom")  
 	private Set<Course> courseSet = new HashSet<Course>();
 	
 	public Set<Course> getCourseSet() {
@@ -38,7 +38,7 @@ public class Classroom {
         this.courseSet.add(course);  
     }
 	
-	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="Classroom")  
+	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="classroom")  
 	private Set<Photo> photoSet = new HashSet<Photo>();
 	
 	public Set<Photo> getPhotoSet() {
