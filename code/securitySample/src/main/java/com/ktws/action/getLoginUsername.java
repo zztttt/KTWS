@@ -19,6 +19,7 @@ import com.ktws.Entity.User;
 
 @RestController
 public class getLoginUsername extends HttpServlet{
+
 	private static final long serialVersionUID = -951797589435947420L;
 	public getLoginUsername() {
 		super();
