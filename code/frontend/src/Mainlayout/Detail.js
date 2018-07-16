@@ -67,6 +67,11 @@ const config2 = {
 class Detail extends Component {
   constructor(props){
     super(props);
+    var passeddata = this.props.location.username;
+    var username = passeddata;
+    this.state = {
+      username:username,
+    };
     this.getdetail=this.getdetail.bind(this);
   }
   getdetail(){
@@ -77,7 +82,7 @@ class Detail extends Component {
       <div>
         <Headbar className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"/>
         <div className="row">
-          <Sidebar className="col-md-2 d-none d-md-block bg-light sidebar"/>
+          <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
                 <Content/>
@@ -102,7 +107,7 @@ function Content(){
         </Panel.Heading>
         <Panel.Body>
           <BootstrapTable  className="col-lg-6" data={ classes }  align={"center"} striped={ true } pagination={true} search={ true } version='4'>
-            <TableHeaderColumn dataField='time' align={"center"} width={'100%'} isKey={ true }>时间</TableHeaderColumn>
+            <TableHeaderColumn dataField='time' headerAlign='center' dataAlign='center' width={'100%'} isKey={ true }>时间</TableHeaderColumn>
           </BootstrapTable>
           <img src="http://3.pic.paopaoche.net/thumb/up/2018-2/201802091125424599775_600_0.png" alt="" className="col-lg-6"/>
         </Panel.Body>
