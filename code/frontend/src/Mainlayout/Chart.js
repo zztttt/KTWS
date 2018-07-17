@@ -60,22 +60,20 @@ class Content extends React.Component {
       classes: []
     };
     this.serverRequest = $.post("/getclasses",{name:this.props.username},function(data){
-    console.log(this.props.username);
-    this.serverRequest = $.post("/getclasses",{name:this.props.username},function(data){
       console.log(data);
       this.setState({
            classes: JSON.parse(data),
         });
     }.bind(this));
     console.log(this.state.classes);
-  }
+  };
 
   render() {
     /*const cellEditProp = {
       mode: 'dbclick',
     };*/
     return (
-      <Table dataSource={classes} columns={columns} bordered></Table>
+      <Table dataSource={this.state.classes} columns={columns} bordered></Table>
     );
   }
 }
