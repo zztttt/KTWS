@@ -1,10 +1,10 @@
-insert into User (id, password, role, username) values (0, 'B53F3MHIQHK4KTP99U5D', 'ROLE_USER', 'VD66EAYQ8VN6I3DKYHI ');
+insert into User (password, role, username) values ('B53F3MHIQHK4KTP99U5D', 'ROLE_USER', 'VD66EAYQ8VN6I3DKYHI ');
 
-insert into User (id, password, role, username) values (3, '123456', 'ROLE_USER', '111');
+insert into User (password, role, username) values ('123456', 'ROLE_USER', '111');
 
-insert into User (id, password, role, username) values (2, 'GMU83J101JV0CJWCQLYU', 'ROLE_USER', 'QMLTY0FC T 0AY0MSP4W');
+insert into User (password, role, username) values ('GMU83J101JV0CJWCQLYU', 'ROLE_USER', 'QMLTY0FC T 0AY0MSP4W');
 
-insert into User (id, password, role, username) values (1, 'WFWQRG80 VS98CS1KK2R', 'ROLE_ADMIN', 'N6X4AT9EOHUURULJ78L2');
+insert into User (password, role, username) values ('WFWQRG80 VS98CS1KK2R', 'ROLE_ADMIN', 'N6X4AT9EOHUURULJ78L2');
 
 insert into Classroom (classroom_id, location, shot_interval) values (2, 'VR9TI7V5 CTPN1JPJTT4', 1);
 
@@ -20,7 +20,7 @@ insert into Photo (photo_id, classroom_id, url, date, total, concentration) valu
 
 insert into Course (course_id, classroom_id, id, course_name, total, time) values (0, 2, 1, 'DA 39PLDBIC NAWCP EA', 0, 'UKE3W4HYK22OSMCO8PSOCHL068E78QB86GVMINVB4OMQ1 K5 H');
 
-insert into Course (course_id, classroom_id, id, course_name, total, time) values (2, 2, 0, 'W0229L5P SDOYRRVEATS', 1, '7795O7IO3 TLESP0JYPHBXQIIN2395GG 5JSA9QX03CUSL929O');
+insert into Course (course_id, classroom_id, id, course_name, total, time) values (2, 2, 2, 'W0229L5P SDOYRRVEATS', 1, '7795O7IO3 TLESP0JYPHBXQIIN2395GG 5JSA9QX03CUSL929O');
 
-insert into Course (course_id, classroom_id, id, course_name, total, time) values (1, 2, 0, '2Q8PHDAVRVDEE7KD60H1', 2, 'YFG21TB CUXGGILDWN XYUSV087JKM2W56NVN2PWPYOWMVM8ES');
+insert into Course (course_id, classroom_id, id, course_name, total, time) values (1, 2, 3, '2Q8PHDAVRVDEE7KD60H1', 2, 'YFG21TB CUXGGILDWN XYUSV087JKM2W56NVN2PWPYOWMVM8ES');
 
