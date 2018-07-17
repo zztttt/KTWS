@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <style type="text/css">
+		h2 {color: purple;}
+		p {font-size: smaller; color: gray;}
+	</style>
+	<script type="text/javascript">
+	var xmlhttp = null;
+	function loadXMLDoc()
+	{	
+		var str = window.location.href;
+	    console.log("href: " + str);
+	    var num = str.indexOf("0");
+	    console.log("num: "+ num);
+	    str = str.substr(0, num-1);
+	    console.log("str:"+str);
+	    var h = str+"8080/signup.html";
+	    window.location = h;
+		if (window.XMLHttpRequest){// code for Firefox, Opera, IE7, etc.
+			xmlhttp=new XMLHttpRequest();
+		}
+		else if (window.ActiveXObject){// code for IE6, IE5
+	  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  	}
+	  	if (xmlhttp!=null){
+			xmlhttp.onreadystatechange=state_Change;
+			
+		}
+		else{
+			alert("Your browser does not support XMLHTTP.");
+		}
+		console.log("ajax");
+	}
+	</script>
+</head>
+<body>
+    <h2 align="center">自定义登录页面</h2>
+    <form action="/user/login"  method="post">
+        <table  align="center">
+            <tbody>
+                <tr>
+                    <td>用户名：</td>
+                    <td><input style="display:block;
+    						    width:250px;
+    						    height:40px;
+    						    line-height:40px;
+    						    margin:0 auto;
+    						    margin-bottom: 10px;
+    						    outline:none;
+    						    border:1px solid #888;
+    						    padding:10px;
+    						    box-sizing:border-box;" type="text" name="username"></td>
+                </tr>
+                <tr>
+                    <td>密码：</td>
+                    <td><input style="display:block;
+                                width:250px;
+                                height:40px;
+                                line-height:40px;
+                                margin:0 auto;
+                                margin-bottom: 10px;
+                                outline:none;
+                                border:1px solid #888;
+                                padding:10px;
+                                box-sizing:border-box;" type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button style="display:block;
+                                        width:250px;
+                                        height:40px;
+                                        line-height: 40px;
+                                        margin:0 auto;
+                                        border:none;
+                                        background-color: #2d65b8;
+                                        color:#fff;
+                                        font-size:16px;
+                                        margin-bottom:5px;
+                                        margin-right:0px" 
+                                        type="submit">登录</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button style="display:block;
+                                        width:250px;
+                                        height:40px;
+                                        line-height: 40px;
+                                        margin:0 auto;
+                                        border:none;
+                                        background-color: #2d65b8;
+                                        color:#fff;
+                                        font-size:16px;
+                                        margin-bottom:5px;
+                                        margin-right:0px" 
+                                        type="button" onclick="loadXMLDoc()">立即注册</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>
