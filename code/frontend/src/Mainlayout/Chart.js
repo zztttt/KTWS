@@ -24,8 +24,8 @@ class Table extends React.Component {
     this.state = {
       classes: []
     };
-    console.log(this.props.location.username);
-    this.serverRequest = $.post("/getclasses",{name:'111'},function(data){
+    console.log(this.props.username);
+    this.serverRequest = $.post("/getclasses",{name:this.props.username},function(data){
       console.log(data);
       this.setState({
            classes: JSON.parse(data),
