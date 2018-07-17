@@ -60,6 +60,9 @@ class Content extends React.Component {
       classes: []
     };
     this.serverRequest = $.post("/getclasses",{name:this.props.username},function(data){
+    console.log(this.props.username);
+    this.serverRequest = $.post("/getclasses",{name:this.props.username},function(data){
+      console.log(data);
       this.setState({
            classes: JSON.parse(data),
         });

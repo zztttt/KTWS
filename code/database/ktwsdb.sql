@@ -58,7 +58,7 @@ create table Photo
 /*==============================================================*/
 create table User
 (
-   id                   int not null,
+   id                   int not null auto_increment,
    password             varchar(20),
    role                 enum('ROLE_USER', 'ROLE_ADMIN'),
    username             varchar(20),
