@@ -111,6 +111,7 @@ function Content(){
           </div>
         </Panel.Body>
       </Panel>
+
       <Panel bsStyle="info">
         <Panel.Heading>
           <Panel.Title componentClass="h3">课程名称：</Panel.Title>
