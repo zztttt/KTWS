@@ -1,6 +1,6 @@
 insert into User (id, password, role, username) values (4, 'B53F3MHIQHK4KTP99U5D', 'ROLE_USER', 'VD66EAYQ8VN6I3DKYHI ');
 
-insert into User (id, password, role, username) values (3, '123456', 'ROLE_USER', '111');
+insert into User (id, password, role, username) values (3, '123', 'ROLE_USER', '111');
 insert into Classroom (classroom_id, location, shot_interval) values (3, 'zzt wo', 5);
 insert into Course (course_id, classroom_id, id, course_name, total, time) values (3, 3, 3, 'zztzzzclass0', 4, 'timeshouldbewhat');
 insert into Course (course_id, classroom_id, id, course_name, total, time) values (4, 3, 3, 'zztzzzclass1', 5, 'timesishaya');
