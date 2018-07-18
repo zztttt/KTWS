@@ -38,22 +38,6 @@ public class Classroom {
         this.courseSet.add(course);  
     }
 	
-	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="classroom")  
-	private Set<Photo> photoSet = new HashSet<Photo>();
-	
-	public Set<Photo> getPhotoSet() {
-		return photoSet;
-	}
-
-	public void setPhotoSet(Set<Photo> photoSet) {
-		this.photoSet = photoSet;
-	}
-	
-	public void addPhoto(Photo photo){  
-		photo.setClassroom(this); //因为course是关系维护端 
-        this.photoSet.add(photo);  
-    }
-	
 	public String getLocation() {
 		return location;
 	}

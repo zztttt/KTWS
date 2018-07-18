@@ -1,31 +1,31 @@
-insert into User (id, password, role, username) values (4, 'B53F3MHIQHK4KTP99U5D', 'ROLE_USER', 'VD66EAYQ8VN6I3DKYHI ');
-
-insert into User (id, password, role, username) values (3, '123', 'ROLE_USER', '111');
+insert into User (user_id, password, role, username) values (3, '123', 'ROLE_USER', '111');
 insert into Classroom (classroom_id, location, shot_interval) values (3, 'zzt wo', 5);
-insert into Course (course_id, classroom_id, id, course_name, total, time) values (3, 3, 3, 'zztzzzclass0', 4, 'timeshouldbewhat');
-insert into Course (course_id, classroom_id, id, course_name, total, time) values (4, 3, 3, 'zztzzzclass1', 5, 'timesishaya');
-insert into Photo (photo_id, classroom_id, url, date, total, concentration) values (3, 3, 'E:\SummerProject\resource\db\20180709170411.png', '2018-07-09', 1, 1);
-insert into Photo (photo_id, classroom_id, url, date, total, concentration) values (4, 3, 'E:\SummerProject\resource\db\20180709170411.png', '2018-07-09', 1, 1);
+insert into Course (course_id, classroom_id, user_id, course_name, total, time) values (3, 3, 3, 'zztzzzclass0', 4, 'timeshouldbewhat');
+insert into Course (course_id, classroom_id, user_id, course_name, total, time) values (4, 3, 3, 'zztzzzclass1', 5, 'timesishaya');
+insert into Photo (photo_id, course_id, url, date, total, concentration) values (3, 3, 'E:\SummerProject\resource\db\20180709170411.png', '2018-07-09', 1, 1);
+insert into Photo (photo_id, course_id, url, date, total, concentration) values (4, 3, 'E:\SummerProject\resource\db\20180709170411.png', '2018-07-09', 1, 1);
 
-insert into User (id, password, role, username) values (2, 'GMU83J101JV0CJWCQLYU', 'ROLE_USER', 'QMLTY0FC T 0AY0MSP4W');
+insert into User (user_id, password, username) values (2, '5DRQBGKR PBLP 1AKF9J', 'VW4PT08AAXGJGRF2D6KE');
 
-insert into User (id, password, role, username) values (1, 'WFWQRG80 VS98CS1KK2R', 'ROLE_ADMIN', 'N6X4AT9EOHUURULJ78L2');
+insert into User (user_id, password, username) values (1, '64NK8GLC ME3TB4SL8M0', 'N9P10OC7GNR9X2QNUSL8');
 
-insert into Classroom (classroom_id, location, shot_interval) values (2, 'VR9TI7V5 CTPN1JPJTT4', 1);
+insert into User (user_id, password, username) values (4, 'A7GQWLV1CW6101TFX597', 'OLP81EA1X2X6X29S4COQ');
 
-insert into Classroom (classroom_id, location, shot_interval) values (1, '8N7FNJWX92LOCR4FN9M4', 0);
+insert into Classroom (classroom_id, location, shot_interval) values (0, 'WCOTU43W6 W4MNYMTE44', 1);
 
-insert into Classroom (classroom_id, location, shot_interval) values (0, 'NBORQW2VSYKC I69VGKS', 2);
+insert into Classroom (classroom_id, location, shot_interval) values (2, 'M396K6D5Y3NT603W8ND7', 2);
 
-insert into Photo (photo_id, classroom_id, url, date, total, concentration) values (2, 2, '3533QKI61OD6G9B4Y9Y2UHCOFY1BH71AL6N7RDPX09MQ3QJXLVIQGPTSGTY2WE C7QT0BN4R56NPAGE2QJCPW3O81EOU1XB1EP5X', '1592-12-14', 1, 0);
+insert into Classroom (classroom_id, location, shot_interval) values (1, 'I1PSGT3Q4 U2U 1CFNBE', 0);
 
-insert into Photo (photo_id, classroom_id, url, date, total, concentration) values (0, 2, 'V4RK8UKQYHYBGWWN5 647RIE0Q33 VRH1 OJ7NW2G2 IOTRFT863QDXU2XF9TCQHHO8AYWKFRONUL96UD2OSAB7C NXGSKS5VC7O', '613-4-13', 0, 1);
+insert into Course (course_id, classroom_id, user_id, course_name, total, time) values (2, 0, 1, 'LK0BYVQALWDCQ4SXBJQU', 0, 'GMQXJ9GWT83JIV4F KGRPXPB82NSVQIDAM07YV0ERT74DT5JNX');
 
-insert into Photo (photo_id, classroom_id, url, date, total, concentration) values (1, 1, '239YM9BBGP3CXH0I34TQE72MDJ53PTEIEW88MFGTTP1PB2HLOLSBRH9M7GLC9JOI26982FJ6J00475H4RMLRA2279LE9KNXAJWKB', '1-1-1', 2, 2);
+insert into Course (course_id, classroom_id, user_id, course_name, total, time) values (1, 2, 2, 'B72VWC6H6P4MA45BKFX0', 2, 'UDAN6G67N48U726BBBIBB KUWC3F98TYWVD7WBK11S4Q7XKVD6');
 
-insert into Course (course_id, classroom_id, id, course_name, total, time) values (0, 2, 1, 'DA 39PLDBIC NAWCP EA', 0, 'UKE3W4HYK22OSMCO8PSOCHL068E78QB86GVMINVB4OMQ1 K5 H');
+insert into Course (course_id, classroom_id, user_id, course_name, total, time) values (0, 0, 2, 'X8PXC6X9EQ7CMAUVGRTL', 1, 'NHWACAGK11NAJOR9CPYUR XLBERF57MQQKFMKXU4DAMY9 4GJG');
 
-insert into Course (course_id, classroom_id, id, course_name, total, time) values (2, 2, 4, 'W0229L5P SDOYRRVEATS', 1, '7795O7IO3 TLESP0JYPHBXQIIN2395GG 5JSA9QX03CUSL929O');
+insert into Photo (photo_id, course_id, url, date, total, concentration) values (2, 2, '3P VFGH628MOF666I905WQ0PPS DNBSJOIPOGSFBGEH1M2RUDIQ41PTSKP606MRBIV0C7VB1RUAE5M5VTVDHK5IBXSO5R7RDCO80', '917-1-9', 2, 0);
 
-insert into Course (course_id, classroom_id, id, course_name, total, time) values (1, 2, 4, '2Q8PHDAVRVDEE7KD60H1', 2, 'YFG21TB CUXGGILDWN XYUSV087JKM2W56NVN2PWPYOWMVM8ES');
+insert into Photo (photo_id, course_id, url, date, total, concentration) values (1, 1, 'M2A9IEO4C8CK9D4 AS84EHFA1BBF94C4HEGSE3TW9 C3E8MVV 30VFVFGUY4KEQMBM0EG4GVOM6J7R3ROQBPICXU8C80U FUD04Q', '1-1-1', 1, 1);
+
+insert into Photo (photo_id, course_id, url, date, total, concentration) values (0, 2, ' TRMAI XWHAOXQ3RS55BF3RJ1FWHRM2CKPK2GQU511H0LAPPDXJ0TW63AH7OB43P3D4JCYX0F8HMFGE AWNFXA4W11WYQSG5OOAV', '326-12-3', 0, 2);
 
