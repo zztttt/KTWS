@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,9 +18,12 @@ import javax.persistence.OneToMany;
 @Entity(name="user")
 public class User implements Serializable{
 	private static final long serialVersionUID = 3576480021719469814L;
+
 	@Id  
+	@Column(name="user_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	private String password;
 	private String role;
 	private String username;

@@ -1,5 +1,8 @@
 package com.ktws.Entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name="Course")
 public class Course {
@@ -23,12 +27,28 @@ public class Course {
 	private Classroom classroom;
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name="id") //指定外键的名称。外键一般都是在关系维护端定义  //这个外键的名字似乎不太好
+    @JoinColumn(name="user_id") //指定外键的名称。外键一般都是在关系维护端定义  //这个外键的名字似乎不太好
 	private User user;
 	
 	private String course_name;
 	private int total;
 	private String time;
+	
+	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="course")  
+	private Set<Photo> photoSet = new HashSet<Photo>();
+	
+	public Set<Photo> getPhotoSet() {
+		return photoSet;
+	}
+
+	public void setPhotoSet(Set<Photo> photoSet) {
+		this.photoSet = photoSet;
+	}
+	
+	public void addPhoto(Photo photo){  
+		photo.setCourse(this); //因为course是关系维护端 
+        this.photoSet.add(photo);  
+    }
 	
 	public String getCourse_name() {
 		return course_name;

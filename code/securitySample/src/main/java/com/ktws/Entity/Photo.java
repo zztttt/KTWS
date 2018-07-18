@@ -25,8 +25,8 @@ public class Photo {
 	private String url;
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name="classroom_id") //指定外键的名称。外键一般都是在关系维护端定义  
-	private Classroom classroom;
+    @JoinColumn(name="course_id") //指定外键的名称。外键一般都是在关系维护端定义  
+	private Course course;
 
 	private Timestamp date;  // 日期类型?
 	private int total;
@@ -64,13 +64,14 @@ public class Photo {
 	public void setConcentration(int concentration) {
 		this.concentration = concentration;
 	}
-	
-	public Classroom getClassroom() {
-		return classroom;
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 	
-	public void setClassroom(Classroom classroom) {
-		this.classroom = classroom;
-	}
 	
 }
