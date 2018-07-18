@@ -1,5 +1,6 @@
 package com.ktws.Entity;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity(name="Photo")
+@Entity(name="photo")
 public class Photo {
 
 	private static final long serialVersionUID = 1L;
@@ -27,12 +28,14 @@ public class Photo {
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name="course_id") //指定外键的名称。外键一般都是在关系维护端定义  
 	private Course course;
-
-	private Timestamp date;  // 日期类型?
+	
+	private Date date;  // 日期类型?
 	private int total;
 	private int concentration;
 	
-	
+	public int getId() {
+		return id;
+	}
 	public String getUrl() {
 		return url;
 	}
@@ -41,11 +44,11 @@ public class Photo {
 		this.url = url;
 	}
 
-	public Timestamp getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

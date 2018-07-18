@@ -7,6 +7,5 @@ import com.ktws.Entity.Photo;
 
 public interface PhotoDao extends JpaRepository<Photo, Long> {
 	
-	@Query("select p.url from photo p where p.course_id = ?1")
-	String findUrlByCourseid(int id);
+	
 }

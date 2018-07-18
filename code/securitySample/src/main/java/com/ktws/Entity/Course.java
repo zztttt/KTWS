@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity(name="Course")
+@Entity(name="course")
 public class Course {
 
 	@Id  
