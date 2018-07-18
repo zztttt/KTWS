@@ -21,36 +21,7 @@ var classes = [{
       open:'N'
   }];
 
-var columns=[{
-    title:'课程号',
-    dataIndex:'id',
-  },{
-    title:'课程名',
-    dataIndex:'classname',
-  },{
-    title:'总人数',
-    dataIndex:'num',
-  },{
-    title:'拍摄频率（秒）',
-    dataIndex:'frequency',
-  },{
-    title:'开启',
-    dataIndex:'open',
-  },{
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a href="javascript:;">Action{record.name}</a>
-        <Divider type="vertical" />
-        <a href="javascript:;">Delete</a>
-        <Divider type="vertical" />
-        <a href="javascript:;" className="ant-dropdown-link">
-          More actions <Icon type="down" />
-        </a>
-      </span>
-    ),
-  }];
+
 //const FrequencyTypes=[5,10,15,20];
 class Content extends React.Component {
   constructor(props){
@@ -72,6 +43,43 @@ class Content extends React.Component {
     /*const cellEditProp = {
       mode: 'dbclick',
     };*/
+    var columns=[{
+        title:'课程号',
+        dataIndex:'id',
+      },{
+        title:'课程名',
+        dataIndex:'classname',
+      },{
+        title:'总人数',
+        dataIndex:'num',
+      },{
+        title:'拍摄频率（秒）',
+        dataIndex:'frequency',
+      },{
+        title:'开启',
+        dataIndex:'open',
+      },{
+        title: 'Action',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <a onClick={function(){
+                      var path = {  
+                        pathname: '/Detail', 
+                        username: this.props.username, 
+                      }
+                      this.context.router.history.push(path);
+                    }.bind(this)}>Action{record.name}</a>
+            <Divider type="vertical" />
+            <a href="javascript:;">Delete</a>
+            <Divider type="vertical" />
+            <a href="javascript:;" className="ant-dropdown-link">
+              More actions <Icon type="down" />
+            </a>
+          </span>
+        ),
+      }];
+
     return (
       <Table dataSource={this.state.classes} columns={columns} bordered></Table>
     );
