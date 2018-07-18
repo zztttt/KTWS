@@ -45,12 +45,20 @@ public class getTeacherClass extends HttpServlet{
 			PrintWriter out = response.getWriter();
 			
 			String userName = request.getParameter("name");
-			//System.out.println("user:"+userName);
+			System.out.println("user:"+userName);
 			
 			JSONArray jsonArray = new JSONArray();
 			
 			User user = userdao.findByName(userName);
+			if(user == null) {
+				System.out.println("fjjsb");
+				System.exit(0);
+			}
 			Set<Course> courseSet = user.getCourseSet();
+			if(courseSet.size() == 0) {
+				System.out.println("set size == 0");
+				System.exit(0);
+			}
 			for (Course course:courseSet) {
 				JSONObject jsonO = new JSONObject();
 				jsonO.put("id", course.getId());
