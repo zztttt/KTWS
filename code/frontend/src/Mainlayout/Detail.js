@@ -71,6 +71,7 @@ class Detail extends Component {
     super(props);
     var username = this.props.location.username;
     var classname = this.props.location.classname;
+    console.log(classname);
     this.state = {
       username:username,
       classname:classname
@@ -114,16 +115,22 @@ class Content extends Component{
     this.setState({
            showImgAddr: null
         });
-    alert('${row.filename}');
+    alert(row.id);
   }
   render(){
     const options={
       onRowClick: this.onRowClick
     }
     var classes = [{
+        id:2,
+        filename:'ad',
         time:1,
+        num:5
     }, {
-        time:2,
+        id:4,
+        filename:'ad',
+        time:1,
+        num:5
     }];
     return (
       <div>
@@ -132,11 +139,11 @@ class Content extends Component{
             <Panel.Title componentClass="h3">课程名称：</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            <BootstrapTable  className="col-lg-6" data={ this.state.photoInfo } options={options} align={"center"} striped={ true } pagination={true} search={ true } version='4'>
-              <TableHeaderColumn dataField='id' headerAlign='center' dataAlign='center' width={'100%'} isKey={ true }>Id</TableHeaderColumn>
-              <TableHeaderColumn dataField='filename' headerAlign='center' dataAlign='center' width={'100%'} isKey={ true }>文件名</TableHeaderColumn>
-              <TableHeaderColumn dataField='time' headerAlign='center' dataAlign='center' width={'100%'} isKey={ true }>时间</TableHeaderColumn>
-              <TableHeaderColumn dataField='num' headerAlign='center' dataAlign='center' width={'100%'} isKey={ true }>人数</TableHeaderColumn>
+            <BootstrapTable  className="col-lg-6" data={ classes } options={options} align={"center"} striped={ true } pagination={true} search={ true } version='4'>
+              <TableHeaderColumn dataField='id' headerAlign='center' dataAlign='center' width={'25%'} isKey={ true }>Id</TableHeaderColumn>
+              <TableHeaderColumn dataField='filename' headerAlign='center' dataAlign='center' width={'25%'} isKey={ false }>文件名</TableHeaderColumn>
+              <TableHeaderColumn dataField='time' headerAlign='center' dataAlign='center' width={'25%'} isKey={ false }>时间</TableHeaderColumn>
+              <TableHeaderColumn dataField='num' headerAlign='center' dataAlign='center' width={'25%'} isKey={ false }>人数</TableHeaderColumn>
 
             </BootstrapTable>
             <img src="http://3.pic.paopaoche.net/thumb/up/2018-2/201802091125424599775_600_0.png" alt="" className="col-lg-6"/>

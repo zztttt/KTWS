@@ -5,6 +5,7 @@ import $ from 'jquery';
 import { Table, Icon, Divider } from 'antd';
 import 'antd/dist/antd.css';
 import 'antd/lib/date-picker/style/css'; 
+import PropTypes from 'prop-types';
 var classes = [{
       key:'1',
       id: 1,
@@ -22,27 +23,28 @@ var classes = [{
   }];
 
 
-//const FrequencyTypes=[5,10,15,20];
-class Content extends React.Component {
+class Chart extends Component {
   constructor(props){
     super(props);
-    //this.getchart=this.getchart.bind(this);
+    var passeddata = this.props.location.username;
+    var username = passeddata;
     this.state = {
-      classes: []
+      classes: null,
+      username:username,
     };
-    this.serverRequest = $.post("/getclasses",{name:this.props.username},function(data){
+    this.serverRequest = $.post("/getclasses",{name:this.state.username},function(data){
       console.log(data);
       this.setState({
            classes: JSON.parse(data),
         });
     }.bind(this));
-    console.log(this.state.classes);
-  };
+  }
 
+  static contextTypes={
+    router:PropTypes.object
+  }
   render() {
-    /*const cellEditProp = {
-      mode: 'dbclick',
-    };*/
+
     var columns=[{
         title:'课程号',
         dataIndex:'id',
@@ -66,10 +68,11 @@ class Content extends React.Component {
             <a onClick={function(){
                       var path = {  
                         pathname: '/Detail', 
-                        username: this.props.username, 
+                        username: this.state.username,
+                        classname: record.classname, 
                       }
                       this.context.router.history.push(path);
-                    }.bind(this)}>Action{record.name}</a>
+                    }.bind(this)}>Action</a>
             <Divider type="vertical" />
             <a href="javascript:;">Delete</a>
             <Divider type="vertical" />
@@ -79,23 +82,6 @@ class Content extends React.Component {
           </span>
         ),
       }];
-
-    return (
-      <Table dataSource={this.state.classes} columns={columns} bordered></Table>
-    );
-  }
-}
-class Chart extends Component {
-  constructor(props){
-    super(props);
-    var passeddata = this.props.location.username;
-    var username = passeddata;
-    this.state = {
-      classes: null,
-      username:username,
-    };
-  }
-  render() {
     return (
       <div>
         <Headbar />
@@ -103,7 +89,7 @@ class Chart extends Component {
           <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-              <Content username={this.state.username}/>
+              <Table dataSource={this.state.classes} columns={columns} bordered></Table>
             </div>
           </main>
         </div>
