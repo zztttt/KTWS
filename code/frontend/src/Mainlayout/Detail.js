@@ -88,7 +88,7 @@ class Detail extends Component {
           <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-                <Content classid={this.state.classname}/>
+                <Content classname={this.state.classname}/>
             </div>
           </main>
         </div>
@@ -114,6 +114,7 @@ class Content extends Component{
     this.setState({
            showImgAddr: null
         });
+    alert('${row.filename}');
   }
   render(){
     const options={
