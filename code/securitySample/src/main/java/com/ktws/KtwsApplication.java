@@ -31,9 +31,8 @@ public class KtwsApplication {
 		SpringApplication.run(KtwsApplication.class, args);
 	}
 	@RequestMapping("/getuser")  
-    public List<User> getUser(){  
-        List<User> users = userdao.findAll();
-        return users;
+    public String getUser(){  
+        return "getuser";
     }
 	@RequestMapping("/admin")  
     public String admin(){  

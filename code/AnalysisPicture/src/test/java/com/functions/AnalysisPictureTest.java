@@ -151,7 +151,7 @@ public class AnalysisPictureTest extends TestCase {
 		//System.out.println(thisPath+"4.jpg");
 		String res = ap.markPhoto(thisPath+"4.jpg", detectStr);
 		//System.out.println(res);
-		File file = new File(thisPath + "marked/4-marked.jpeg");//为啥变成jpeg了
+		File file = new File(thisPath + "marked/4.jpg");//为啥变成jpeg了
 		assertFalse(!file.exists());
 	}
 

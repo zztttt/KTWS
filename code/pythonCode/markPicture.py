@@ -23,10 +23,10 @@ def markPicture(filepath, points):
     #img.show()
 
     try:
-        img.save(tmpfilepath+"/marked/"+filename[:-(len(img.format)+1)]+"-marked."+img.format)
+        img.save(tmpfilepath+"/marked/"+filename)
     except FileNotFoundError:
         os.mkdir(tmpfilepath+"/marked")
-        img.save(tmpfilepath+"/marked/"+filename[:-(len(img.format)+1)]+"-marked."+img.format)
+        img.save(tmpfilepath+"/marked/"+filename)
 
     return "success"
 

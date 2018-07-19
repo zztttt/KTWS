@@ -27,5 +27,5 @@ insert into Photo (photo_id, course_id, url, date, total, concentration) values 
 
 insert into Photo (photo_id, course_id, url, date, total, concentration) values (1, 1, 'M2A9IEO4C8CK9D4 AS84EHFA1BBF94C4HEGSE3TW9 C3E8MVV 30VFVFGUY4KEQMBM0EG4GVOM6J7R3ROQBPICXU8C80U FUD04Q', '1-1-1', 1, 1);
 
-insert into Photo (photo_id, course_id, url, date, total, concentration) values (0, 2, ' TRMAI XWHAOXQ3RS55BF3RJ1FWHRM2CKPK2GQU511H0LAPPDXJ0TW63AH7OB43P3D4JCYX0F8HMFGE AWNFXA4W11WYQSG5OOAV', '326-12-3', 0, 2);
+insert into Photo (photo_id, course_id, url, date, total, concentration) values (5, 2, ' TRMAI XWHAOXQ3RS55BF3RJ1FWHRM2CKPK2GQU511H0LAPPDXJ0TW63AH7OB43P3D4JCYX0F8HMFGE AWNFXA4W11WYQSG5OOAV', '326-12-3', 2, 2);
 
