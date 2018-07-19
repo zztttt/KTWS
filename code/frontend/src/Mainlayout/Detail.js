@@ -110,28 +110,23 @@ class Content extends Component{
            photoInfo: JSON.parse(data),
         });
     }.bind(this));
+    this.serverRequest = $.post("/gettotalnum",{name:this.props.classname},function(data){
+      console.log("totnum="+data);
+      this.setState({
+           totalnum: JSON.parse(data),
+        });
+    }.bind(this));
   }
   onRowClick(row){
     this.setState({
-           showImgAddr: null
+           showImgAddr: row.filename
         });
-    alert(row.id);
+    alert("focus num ="+row.focus);
   }
   render(){
     const options={
       onRowClick: this.onRowClick
     }
-    var classes = [{
-        id:2,
-        filename:'ad',
-        time:1,
-        num:5
-    }, {
-        id:4,
-        filename:'ad',
-        time:1,
-        num:5
-    }];
     return (
       <div>
         <Panel bsStyle="info">
@@ -139,14 +134,14 @@ class Content extends Component{
             <Panel.Title componentClass="h3">课程名称：</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            <BootstrapTable  className="col-lg-6" data={ classes } options={options} align={"center"} striped={ true } pagination={true} search={ true } version='4'>
-              <TableHeaderColumn dataField='id' headerAlign='center' dataAlign='center' width={'25%'} isKey={ true }>Id</TableHeaderColumn>
-              <TableHeaderColumn dataField='filename' headerAlign='center' dataAlign='center' width={'25%'} isKey={ false }>文件名</TableHeaderColumn>
-              <TableHeaderColumn dataField='time' headerAlign='center' dataAlign='center' width={'25%'} isKey={ false }>时间</TableHeaderColumn>
-              <TableHeaderColumn dataField='num' headerAlign='center' dataAlign='center' width={'25%'} isKey={ false }>人数</TableHeaderColumn>
-
+            <BootstrapTable  className="col-lg-6" data={ this.state.photoInfo } options={options} align={"center"} striped={ true } pagination={true} search={ true } version='4'>
+              <TableHeaderColumn dataField='id' dataAlign='center'  isKey={ true }>Id</TableHeaderColumn>
+              <TableHeaderColumn dataField='filename' dataAlign='center' isKey={ false }>文件名</TableHeaderColumn>
+              <TableHeaderColumn dataField='time' dataAlign='center'  isKey={ false }>时间</TableHeaderColumn>
+              <TableHeaderColumn dataField='num' dataAlign='center'  isKey={ false }>人数</TableHeaderColumn>
+              <TableHeaderColumn dataField='focus' dataAlign='center'  isKey={ false }>专注人数</TableHeaderColumn>
             </BootstrapTable>
-            <img src="http://3.pic.paopaoche.net/thumb/up/2018-2/201802091125424599775_600_0.png" alt="" className="col-lg-6"/>
+            <img src={this.state.showImgAddr} alt="" className="col-lg-6"/>
           </Panel.Body>
         </Panel>
         <Panel bsStyle="info">
