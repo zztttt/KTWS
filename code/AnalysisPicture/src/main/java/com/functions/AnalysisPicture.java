@@ -193,8 +193,10 @@ public class AnalysisPicture {
 		
 		// arguments for python cmd line
 		String args = "python D:\\markPicture.py "; // py code path
-		String codepath = AnalysisPicture.class.getResource("/").getPath();
-		//System.out.println(codepath);
+		
+		//String codepath = AnalysisPicture.class.getResource("/").getPath();
+		String codepath = System.getProperty("user.dir");
+		System.out.println(codepath);
 		args += filepath; // file path with file name
 		for (int i=0; i<count; i++) {
 			JSONObject face = JSONObject.fromObject(faceset.get(i));
