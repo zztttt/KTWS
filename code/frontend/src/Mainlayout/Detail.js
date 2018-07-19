@@ -120,9 +120,17 @@ class Content extends Component{
     this.setState({
            showImgAddr: row.filename
         });
-    config2.series[0].data[0][1] = (row.focus/this.state.totalnum)*100;
-    config2.series[0].data[1][1] = (row.num-row.focus/this.state.totalnum)*100;
-    config2.series[0].data[2][1] = 100-(row.num/this.state.totalnum)*100;
+    config2.update({
+      series: [{
+        type: 'pie',
+        name: 'Browser share',
+        data: [
+          ['识别出专注人数',   (row.focus/this.state.totalnum)*100],
+          ['识别出不专注人数',   (row.num-row.focus/this.state.totalnum)*100],
+          ['未识别出人数',  100-(row.num/this.state.totalnum)*100],
+        ]
+      }],
+    })
   }
   render(){
     const options={
