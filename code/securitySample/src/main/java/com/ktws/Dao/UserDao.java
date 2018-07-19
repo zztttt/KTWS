@@ -9,7 +9,6 @@ import com.ktws.Entity.User;
 
 public interface UserDao extends JpaRepository<User, Long> {
 
-	List<User> findAll();
 	@Query("select count(*) from user u where u.id=?1")
 	int findCountId(int id);
 	

@@ -47,7 +47,7 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
         	.and()
         	.formLogin()   
         	.loginPage("/login.html") //  定义当需要用户登录时候，转到的登录页面。
-        	.defaultSuccessUrl("/getuser")
+        	//.defaultSuccessUrl("/getuser")
         	.loginProcessingUrl("/user/login")
         	.and()
             .authorizeRequests()        // 定义哪些URL需要被保护、哪些不需要被保护
