@@ -59,10 +59,8 @@ const config2 = {
         type: 'pie',
         name: 'Browser share',
         data: [
-          ['0.5以下',   35.0],
-          ['0.5 ~ 0.7',  28],
-          ['0.7 ~ 0.9',  22],
-          ['0.9 ~ 1',   12]
+          ['识别出人数',   35.0],
+          ['未识别出人数',  28],
         ]
       }],
     } 
@@ -121,7 +119,9 @@ class Content extends Component{
     this.setState({
            showImgAddr: row.filename
         });
-    alert("focus num ="+row.focus);
+    config2.series.data[0][1] = (row.num/this.state.totalnum)*100;
+    config2.series.data[1][1] = 100-(row.num/this.state.totalnum)*100;
+    alert(config2.series.data[0][1]);
   }
   render(){
     const options={
