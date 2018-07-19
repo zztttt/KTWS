@@ -101,7 +101,8 @@ class Content extends Component{
     super(props);
     this.onRowClick=this.onRowClick.bind(this);
     this.state = {
-      showImgAddr:null
+      showImgAddr:null,
+      config:config2
     };
     this.serverRequest = $.post("/getphotos",{name:this.props.classname},function(data){
       console.log(data);
@@ -117,19 +118,12 @@ class Content extends Component{
     }.bind(this));
   }
   onRowClick(row){
+    config2.series[0].data[0][1] = (row.focus/this.state.totalnum)*100;
+    config2.series[0].data[1][1] = (row.num-row.focus/this.state.totalnum)*100;
+    config2.series[0].data[2][1] = 100-(row.num/this.state.totalnum)*100;
     this.setState({
-           showImgAddr: row.filename
-        });
-    config2.update({
-      series: [{
-        type: 'pie',
-        name: 'Browser share',
-        data: [
-          ['识别出专注人数',   (row.focus/this.state.totalnum)*100],
-          ['识别出不专注人数',   (row.num-row.focus/this.state.totalnum)*100],
-          ['未识别出人数',  100-(row.num/this.state.totalnum)*100],
-        ]
-      }],
+      config2:config2,
+      showImgAddr: row.filename
     })
   }
   render(){
@@ -162,7 +156,7 @@ class Content extends Component{
               <ReactHighcharts config={config1}></ReactHighcharts>
             </div>
             <div className="col-lg-5">
-              <ReactHighcharts config={config2}></ReactHighcharts>
+              <ReactHighcharts config={this.state.config2}></ReactHighcharts>
             </div>
           </Panel.Body>
         </Panel>

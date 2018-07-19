@@ -37,7 +37,7 @@ var config1 = {
       data: [5,4,8,10,9,3,7]
     }],
 }
-const config2 = {
+var config2 = {
       title: {text: '每日上课专注度比例'},
       subtitle: {text: '课堂威视'},
       plotOptions: {
@@ -71,11 +71,19 @@ class Statistics extends Component {
     var username = passeddata;
     this.state = {
       username:username,
+      config:config2
     };
     this.getstatistics=this.getstatistics.bind(this);
+    this.change=this.change.bind(this);
   }
   getstatistics(){
 
+  }
+  change(){
+    config2.series[0].data[0][1] = 100;
+    this.setState({
+      config:config2
+    })
   }
   render() {
     return (
@@ -85,7 +93,8 @@ class Statistics extends Component {
           <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-              <Content/>
+              <ReactHighcharts config={this.state.config}></ReactHighcharts>
+              <button onClick={this.change}/>
             </div>
           </main>
         </div>
