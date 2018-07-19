@@ -2,6 +2,11 @@ package com.ktws.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,16 +14,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ktws.Dao.PhotoDao;
+import com.ktws.Entity.Photo;
 import com.ktws.Entity.User;
 
 @RestController
 public class getLoginUsername extends HttpServlet{
+	
+	@Autowired
+	PhotoDao photodao;
+
 	private static final long serialVersionUID = -951797589435947420L;
 	public getLoginUsername() {
 		super();
@@ -37,6 +50,14 @@ public class getLoginUsername extends HttpServlet{
             out.print(o);
             out.flush();
             out.close();
+            
+            List<Photo> photolist = photodao.findAll();
+            System.out.println(photolist);
+            for(Photo p : photolist) {
+            	SimpleDateFormat f = new SimpleDateFormat("EE",Locale.US);
+            	String res = f.format(p.getDate());
+            	System.out.printf("%s, %s\n", p.getDate(), res);
+            }
 		}
 		catch(Exception ex) {
 			

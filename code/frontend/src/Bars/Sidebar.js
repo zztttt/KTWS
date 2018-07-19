@@ -17,7 +17,7 @@ class Sidebar extends Component {
                 <a className="nav-link active" onClick={function(){
                   var path = {  
                     pathname: '/Hello', 
-                    username: this.state.username, 
+                    username: this.props.username, 
                   }
                   this.context.router.history.push(path);
                 }.bind(this)}>
@@ -29,7 +29,7 @@ class Sidebar extends Component {
                 <a className="nav-link" onClick={function(){
                   var path = {  
                     pathname: '/Chart', 
-                    username: this.state.username, 
+                    username: this.props.username, 
                   }
                   this.context.router.history.push(path);
                 }.bind(this)}>
@@ -41,7 +41,7 @@ class Sidebar extends Component {
                 <a className="nav-link" onClick={function(){
                   var path = {  
                     pathname: '/Statistics', 
-                    username: this.state.username, 
+                    username: this.props.username, 
                   }
                   this.context.router.history.push(path);
                 }.bind(this)} >
@@ -53,7 +53,7 @@ class Sidebar extends Component {
                 <a className="nav-link" onClick={function(){
                   var path = {  
                     pathname: '/Report', 
-                    username: this.state.username, 
+                    username: this.props.username, 
                   }
                   this.context.router.history.push(path);
                 }.bind(this)}>

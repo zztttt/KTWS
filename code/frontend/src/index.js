@@ -22,4 +22,3 @@ ReactDOM.render((
       </Switch>
     </HashRouter>
 ), document.getElementById('root'));
-registerServiceWorker();

@@ -4,6 +4,8 @@ import Headbar from '../Bars/Headbar';
 import '../Bars/Sidebar.css';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import {Panel} from 'react-bootstrap';
+import $ from 'jquery';
+
 var ReactHighcharts = require('react-highcharts');
 var config1 = {
   title: {
@@ -57,20 +59,20 @@ const config2 = {
         type: 'pie',
         name: 'Browser share',
         data: [
-          ['0.5以下',   35.0],
-          ['0.5 ~ 0.7',  28],
-          ['0.7 ~ 0.9',  22],
-          ['0.9 ~ 1',   12]
+          ['识别出人数',   35.0],
+          ['未识别出人数',  28],
         ]
       }],
     } 
 class Detail extends Component {
   constructor(props){
     super(props);
-    var passeddata = this.props.location.username;
-    var username = passeddata;
+    var username = this.props.location.username;
+    var classname = this.props.location.classname;
+    console.log(classname);
     this.state = {
       username:username,
+      classname:classname
     };
     this.getdetail=this.getdetail.bind(this);
   }
@@ -85,7 +87,7 @@ class Detail extends Component {
           <Sidebar username={this.state.username}/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-                <Content/>
+                <Content classname={this.state.classname}/>
             </div>
           </main>
         </div>
@@ -93,47 +95,78 @@ class Detail extends Component {
     );
   }
 }
-function Content(){
-  var classes = [{
-      time:1,
-  }, {
-      time:2,
-  }];
-  return (
-    <div>
-      <Panel bsStyle="info">
-        <Panel.Heading>
-          <Panel.Title componentClass="h3">课程名称：</Panel.Title>
-        </Panel.Heading>
-        <Panel.Body>
-          <BootstrapTable  className="col-lg-6" data={ classes }  align={"center"} striped={ true } pagination={true} search={ true } version='4'>
-            <TableHeaderColumn dataField='time' headerAlign='center' dataAlign='center' width={'100%'} isKey={ true }>时间</TableHeaderColumn>
-          </BootstrapTable>
-          <img src="http://3.pic.paopaoche.net/thumb/up/2018-2/201802091125424599775_600_0.png" alt="" className="col-lg-6"/>
-        </Panel.Body>
-      </Panel>
-      <Panel bsStyle="info">
-        <Panel.Heading>
-          <Panel.Title componentClass="h3">课程名称：</Panel.Title>
-        </Panel.Heading>
-        <Panel.Body>
-          <div className="col-lg-7">
-            <ReactHighcharts config={config1}></ReactHighcharts>
-          </div>
-          <div className="col-lg-5">
-            <ReactHighcharts config={config2}></ReactHighcharts>
-          </div>
-        </Panel.Body>
-      </Panel>
-      <Panel bsStyle="info">
+class Content extends Component{
+  constructor(props){
+    super(props);
+    this.onRowClick=this.onRowClick.bind(this);
+    this.state = {
+      showImgAddr:null
+    };
+    this.serverRequest = $.post("/getphotos",{name:this.props.classname},function(data){
+      console.log(data);
+      this.setState({
+           photoInfo: JSON.parse(data),
+        });
+    }.bind(this));
+    this.serverRequest = $.post("/gettotalnum",{name:this.props.classname},function(data){
+      console.log("totnum="+data);
+      this.setState({
+           totalnum: JSON.parse(data),
+        });
+    }.bind(this));
+  }
+  onRowClick(row){
+    this.setState({
+           showImgAddr: row.filename
+        });
+    config2.series.data[0][1] = (row.num/this.state.totalnum)*100;
+    config2.series.data[1][1] = 100-(row.num/this.state.totalnum)*100;
+    alert(config2.series.data[0][1]);
+  }
+  render(){
+    const options={
+      onRowClick: this.onRowClick
+    }
+    return (
+      <div>
+        <Panel bsStyle="info">
           <Panel.Heading>
             <Panel.Title componentClass="h3">课程名称：</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            <ReactHighcharts className="col-lg-12" config={config1}></ReactHighcharts>
+            <BootstrapTable  className="col-lg-6" data={ this.state.photoInfo } options={options} align={"center"} striped={ true } pagination={true} search={ true } version='4'>
+              <TableHeaderColumn dataField='id' dataAlign='center'  isKey={ true }>Id</TableHeaderColumn>
+              <TableHeaderColumn dataField='filename' hidden dataAlign='center' isKey={ false }>文件名</TableHeaderColumn>
+              <TableHeaderColumn dataField='time' dataAlign='center'  isKey={ false }>时间</TableHeaderColumn>
+              <TableHeaderColumn dataField='num' dataAlign='center'  isKey={ false }>人数</TableHeaderColumn>
+              <TableHeaderColumn dataField='focus' dataAlign='center'  isKey={ false }>专注人数</TableHeaderColumn>
+            </BootstrapTable>
+            <img src={this.state.showImgAddr} alt="" className="col-lg-6"/>
           </Panel.Body>
-      </Panel>
-    </div>
-  );
+        </Panel>
+        <Panel bsStyle="info">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+          </Panel.Heading>
+          <Panel.Body>
+            <div className="col-lg-7">
+              <ReactHighcharts config={config1}></ReactHighcharts>
+            </div>
+            <div className="col-lg-5">
+              <ReactHighcharts config={config2}></ReactHighcharts>
+            </div>
+          </Panel.Body>
+        </Panel>
+        <Panel bsStyle="info">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+            </Panel.Heading>
+            <Panel.Body>
+              <ReactHighcharts className="col-lg-12" config={config1}></ReactHighcharts>
+            </Panel.Body>
+        </Panel>
+      </div>
+    );
+  }
 }
 export default Detail;

@@ -13,6 +13,7 @@ class Report extends Component {
       username:username,
     };
     this.getreport=this.getreport.bind(this);
+    console.log(this.props.location.username);
   }
   getreport(){
 
