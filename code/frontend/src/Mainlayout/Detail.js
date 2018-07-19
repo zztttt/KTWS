@@ -136,7 +136,7 @@ class Content extends Component{
           <Panel.Body>
             <BootstrapTable  className="col-lg-6" data={ this.state.photoInfo } options={options} align={"center"} striped={ true } pagination={true} search={ true } version='4'>
               <TableHeaderColumn dataField='id' dataAlign='center'  isKey={ true }>Id</TableHeaderColumn>
-              <TableHeaderColumn dataField='filename' dataAlign='center' isKey={ false }>文件名</TableHeaderColumn>
+              <TableHeaderColumn dataField='filename' hidden dataAlign='center' isKey={ false }>文件名</TableHeaderColumn>
               <TableHeaderColumn dataField='time' dataAlign='center'  isKey={ false }>时间</TableHeaderColumn>
               <TableHeaderColumn dataField='num' dataAlign='center'  isKey={ false }>人数</TableHeaderColumn>
               <TableHeaderColumn dataField='focus' dataAlign='center'  isKey={ false }>专注人数</TableHeaderColumn>
