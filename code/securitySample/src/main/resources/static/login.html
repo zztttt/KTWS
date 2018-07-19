@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录页面</title>
-    <style type="text/css">
-		h2 {color: purple;}
-		p {font-size: smaller; color: gray;}
-	</style>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="login.style.css">
 	<script type="text/javascript">
 	var xmlhttp = null;
 	function loadXMLDoc()
@@ -37,68 +34,28 @@
 	</script>
 </head>
 <body>
-    <h2 align="center">自定义登录页面</h2>
+<div id="content">
+    <div class="login-header">
+        <text>课堂威视登陆系统</text>
+    </div>
     <form action="/user/login"  method="post">
-        <table  align="center">
-            <tbody>
-                <tr>
-                    <td>用户名：</td>
-                    <td><input style="display:block;
-    						    width:250px;
-    						    height:40px;
-    						    line-height:40px;
-    						    margin:0 auto;
-    						    margin-bottom: 10px;
-    						    outline:none;
-    						    border:1px solid #888;
-    						    padding:10px;
-    						    box-sizing:border-box;" type="text" name="username"></td>
-                </tr>
-                <tr>
-                    <td>密码：</td>
-                    <td><input style="display:block;
-                                width:250px;
-                                height:40px;
-                                line-height:40px;
-                                margin:0 auto;
-                                margin-bottom: 10px;
-                                outline:none;
-                                border:1px solid #888;
-                                padding:10px;
-                                box-sizing:border-box;" type="password" name="password"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button style="display:block;
-                                        width:250px;
-                                        height:40px;
-                                        line-height: 40px;
-                                        margin:0 auto;
-                                        border:none;
-                                        background-color: #2d65b8;
-                                        color:#fff;
-                                        font-size:16px;
-                                        margin-bottom:5px;
-                                        margin-right:0px" 
-                                        type="submit">登录</button></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button style="display:block;
-                                        width:250px;
-                                        height:40px;
-                                        line-height: 40px;
-                                        margin:0 auto;
-                                        border:none;
-                                        background-color: #2d65b8;
-                                        color:#fff;
-                                        font-size:16px;
-                                        margin-bottom:5px;
-                                        margin-right:0px" 
-                                        type="button" onclick="loadXMLDoc()">立即注册</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="login-input-box">
+            <span class="icon">用户名:&nbsp;</span>
+            <input type="text" placeholder=" 请 输 入 用 户 名" name="username">
+        </div>
+        <div class="login-input-box">
+            <span class="icon">密&nbsp;&nbsp;&nbsp;码&nbsp;:</span>
+            <input type="password" placeholder=" 请 输 入 密 码" name="password">
+        </div>
+        <div class="remember-box">
+        </div>
+        <div class="login-button-box">
+            <button type="submit">登陆</button>
+        </div>
+        <div class="logon-button-box">
+            <button type="button" onclick="loadXMLDoc()">立即注册</button>
+        </div>
     </form>
+</div>
 </body>
 </html>
