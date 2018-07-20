@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ktws.Dao.PhotoDao;
 import com.ktws.Dao.UserDao;
 import com.ktws.Entity.Classroom;
 import com.ktws.Entity.Course;
@@ -40,18 +41,18 @@ public class getTeacherClass extends HttpServlet{
 	}
 	
 	@RequestMapping(value="/getclasses",method=RequestMethod.POST)
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
 			PrintWriter out = response.getWriter();
 			
 			String userName = request.getParameter("name");
-			System.out.println("user:"+userName);
+			//System.out.println("user:"+userName);
 			
 			JSONArray jsonArray = new JSONArray();
 			
 			User user = userdao.findByName(userName);
-			if(user == null) {
-				System.out.println("fjjsb");
+			if (user == null) {
+				System.out.println("user null");
 				System.exit(0);
 			}
 			Set<Course> courseSet = user.getCourseSet();
