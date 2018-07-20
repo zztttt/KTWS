@@ -9,7 +9,7 @@ import $ from 'jquery';
 var ReactHighcharts = require('react-highcharts');
 var config1 = {
   title: {
-    text: '每日上课听讲人数'
+    text: '近30张照片统计'
   },
   subtitle: {
     text: '课堂威视'
@@ -19,7 +19,7 @@ var config1 = {
       text: 'Day'
     },
     categories: [
-      'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      '30~20', '20~10', '10~0']
   },
   tooltip: {
     valueSuffix: '人'
@@ -32,15 +32,15 @@ var config1 = {
   },
   series: [
     {
-      name: 'math', 
-      data: [7,8,9,11,2,5,6]
+      name: '总人数', 
+      data: [2,5,6]
     }, {
-      name: 'Chinese', 
-      data: [5,4,8,10,9,3,7]
+      name: '专注人数', 
+      data: [9,3,7]
     }],
 }
 const config2 = {
-      title: {text: '每日上课专注度比例'},
+      title: {text: '单张照片统计'},
       subtitle: {text: '课堂威视'},
       plotOptions: {
         pie: {
@@ -102,7 +102,8 @@ class Content extends Component{
     this.onRowClick=this.onRowClick.bind(this);
     this.state = {
       showImgAddr:null,
-      config:config2
+      config1:config1,
+      config2:config2
     };
     this.serverRequest = $.post("/getphotos",{name:this.props.classname},function(data){
       console.log(data);
@@ -116,12 +117,25 @@ class Content extends Component{
            totalnum: JSON.parse(data),
         });
     }.bind(this));
+    this.serverRequest = $.post("/getRecentStatistic",{name:this.props.classname},function(data){
+      console.log("getRecentStatistic="+data);
+      this.setState({
+           lineChartData: JSON.parse(data),
+        });
+    }.bind(this));
   }
   onRowClick(row){
-    config2.series[0].data[0][1] = (row.focus/this.state.totalnum)*100;
-    config2.series[0].data[1][1] = (row.num-row.focus/this.state.totalnum)*100;
-    config2.series[0].data[2][1] = 100-(row.num/this.state.totalnum)*100;
+    config1.series[0].data[0] = this.state.lineChartData[0];
+    config1.series[0].data[1] = this.state.lineChartData[2];
+    config1.series[0].data[2] = this.state.lineChartData[4];
+    config1.series[1].data[0] = this.state.lineChartData[1];
+    config1.series[1].data[1] = this.state.lineChartData[3];
+    config1.series[1].data[2] = this.state.lineChartData[5];
+    config2.series[0].data[0][1] = (row.focus);
+    config2.series[0].data[1][1] = (row.num-row.focus);
+    config2.series[0].data[2][1] = (this.state.totalnum-row.num);
     this.setState({
+      config1:config1,
       config2:config2,
       showImgAddr: row.filename
     })
@@ -162,10 +176,10 @@ class Content extends Component{
         </Panel>
         <Panel bsStyle="info">
             <Panel.Heading>
-              <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+              <Panel.Title componentClass="h3">近30张照片统计：</Panel.Title>
             </Panel.Heading>
             <Panel.Body>
-              <ReactHighcharts className="col-lg-12" config={config1}></ReactHighcharts>
+              <ReactHighcharts className="col-lg-12" config={this.state.config1}></ReactHighcharts>
             </Panel.Body>
         </Panel>
       </div>
