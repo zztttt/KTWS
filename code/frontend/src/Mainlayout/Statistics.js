@@ -38,32 +38,43 @@ var config1 = {
     }],
 }
 var config2 = {
-      title: {text: '每日上课专注度比例'},
-      subtitle: {text: '课堂威视'},
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
-            style: {
-               color: (ReactHighcharts.theme && ReactHighcharts.theme.contrastTextColor) || 'black'
-            }
-          }
-        }
-      },
-      series: [{
-        type: 'pie',
-        name: 'Browser share',
+  subtitle: {
+    text: '课堂威视'
+  },
+  xAxis: {
+    title: {
+      text: 'groups'
+    }
+  },
+  tooltip: {
+    valueSuffix: '人'
+  },
+  legend: {
+    layout: 'vertical', 
+    align: 'right', 
+    verticalAlign: 'middle', 
+    borderWidth: 0
+  },
+  series: [{
+        type: 'column',
+        name: '专注人数',
         data: [
-          ['0.5以下',   35.0],
-          ['0.5 ~ 0.7',  28],
-          ['0.7 ~ 0.9',  22],
-          ['0.9 ~ 1',   12]
+          35
+        ]
+      },{
+        type: 'column',
+        name: '不专注人数',
+        data: [
+          35
+        ]
+      },{
+        type: 'column',
+        name: '未识别出人数',
+        data: [
+          35
         ]
       }],
-    } 
+} 
 class Statistics extends Component {
   constructor(props){
     super(props);
@@ -80,7 +91,6 @@ class Statistics extends Component {
 
   }
   change(){
-    config2.series[0].data[0][1] = 100;
     this.setState({
       config:config2
     })

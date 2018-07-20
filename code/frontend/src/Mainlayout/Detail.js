@@ -16,7 +16,7 @@ var config1 = {
   },
   xAxis: {
     title: {
-      text: 'Day'
+      text: 'group'
     },
     categories: [
       '30~20', '20~10', '10~0']
@@ -39,7 +39,7 @@ var config1 = {
       data: [9,3,7]
     }],
 }
-const config2 = {
+var config2 = {
       title: {text: '单张照片统计'},
       subtitle: {text: '课堂威视'},
       plotOptions: {
@@ -65,6 +65,44 @@ const config2 = {
         ]
       }],
     } 
+var config3 = {
+  subtitle: {
+    text: '课堂威视'
+  },
+  xAxis: {
+    title: {
+      text: 'groups'
+    }
+  },
+  tooltip: {
+    valueSuffix: '人'
+  },
+  legend: {
+    layout: 'vertical', 
+    align: 'right', 
+    verticalAlign: 'middle', 
+    borderWidth: 0
+  },
+  series: [{
+        type: 'column',
+        name: '专注人数',
+        data: [
+          35
+        ]
+      },{
+        type: 'column',
+        name: '不专注人数',
+        data: [
+          35
+        ]
+      },{
+        type: 'column',
+        name: '未识别出人数',
+        data: [
+          35
+        ]
+      }],
+} 
 class Detail extends Component {
   constructor(props){
     super(props);
@@ -101,9 +139,9 @@ class Content extends Component{
     super(props);
     this.onRowClick=this.onRowClick.bind(this);
     this.state = {
-      showImgAddr:null,
       config1:config1,
-      config2:config2
+      config2:config2,
+      config3:config3
     };
     this.serverRequest = $.post("/getphotos",{name:this.props.classname},function(data){
       console.log(data);
@@ -134,11 +172,20 @@ class Content extends Component{
     config2.series[0].data[0][1] = (row.focus);
     config2.series[0].data[1][1] = (row.num-row.focus);
     config2.series[0].data[2][1] = (this.state.totalnum-row.num);
+    config3.series[0].data[0] = (row.focus);
+    config3.series[1].data[0] = (row.num-row.focus);
+    config3.series[2].data[0] = (this.state.totalnum-row.num);
     this.setState({
       config1:config1,
       config2:config2,
-      showImgAddr: row.filename
+      config3:config3,
     })
+    this.serverRequest = $.post("/getImage",{id:row.id},function(data){
+      console.log("getImage="+data);
+      this.setState({
+           imageData: JSON.parse(data),
+        });
+    }.bind(this));
   }
   render(){
     const options={
@@ -158,16 +205,16 @@ class Content extends Component{
               <TableHeaderColumn dataField='num' dataAlign='center'  isKey={ false }>人数</TableHeaderColumn>
               <TableHeaderColumn dataField='focus' dataAlign='center'  isKey={ false }>专注人数</TableHeaderColumn>
             </BootstrapTable>
-            <img src={this.state.showImgAddr} alt="" className="col-lg-6"/>
+            <img src={"data:image/png;base64," + this.state.imageData} alt="" className="col-lg-6"/>
           </Panel.Body>
         </Panel>
         <Panel bsStyle="info">
           <Panel.Heading>
-            <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+            <Panel.Title componentClass="h3">单张照片统计：</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
             <div className="col-lg-7">
-              <ReactHighcharts config={config1}></ReactHighcharts>
+              <ReactHighcharts config={this.state.config3}></ReactHighcharts>
             </div>
             <div className="col-lg-5">
               <ReactHighcharts config={this.state.config2}></ReactHighcharts>
