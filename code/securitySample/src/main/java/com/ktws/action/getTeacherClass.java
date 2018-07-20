@@ -53,12 +53,12 @@ public class getTeacherClass extends HttpServlet{
 			User user = userdao.findByName(userName);
 			if (user == null) {
 				System.out.println("user null");
-				System.exit(0);
+				return;
 			}
 			Set<Course> courseSet = user.getCourseSet();
 			if(courseSet.size() == 0) {
 				System.out.println("set size == 0");
-				System.exit(0);
+				return;
 			}
 			for (Course course:courseSet) {
 				JSONObject jsonO = new JSONObject();

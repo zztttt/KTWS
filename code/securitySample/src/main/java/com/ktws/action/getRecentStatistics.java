@@ -67,7 +67,7 @@ public class getRecentStatistics extends HttpServlet{
 				.setParameter(2, num)
 				.getResultList();
 		if (photos.size() != num) {
-			System.out.println("getRecentStatistic: photo number not right");
+			System.out.println("getRecentStatistic: photo number not right, photos.size:"+photos.size());
 			return ;
 		}
 		JSONArray jsonArray = new JSONArray();

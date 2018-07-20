@@ -55,7 +55,7 @@ public class getTotalNum extends HttpServlet{
 			Boolean isValid  = false;
             PrintWriter out = response.getWriter();
             response.setContentType("text/html;charset=utf-8");
-            out.print(jsonArray.toString());
+            out.print(totalNum);
             out.flush();
             out.close();
             
