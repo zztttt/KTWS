@@ -183,7 +183,7 @@ class Content extends Component{
     this.serverRequest = $.post("/getImage",{id:row.id},function(data){
       console.log("getImage="+data);
       this.setState({
-           imageData: JSON.parse(data),
+           imageData: data,
         });
     }.bind(this));
   }
