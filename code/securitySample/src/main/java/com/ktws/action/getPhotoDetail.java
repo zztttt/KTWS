@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,23 +33,30 @@ import net.sf.json.JSONObject;
 @RestController
 public class getPhotoDetail extends HttpServlet{
 	private static final long serialVersionUID = 5201346482949303774L;
+	@PersistenceContext
+	protected EntityManager em; 
 	@Autowired
 	CourseDao coursedao;
 	@Autowired
 	PhotoDao photodao;
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/getphotos",method=RequestMethod.POST)
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
-			System.out.println("func:doGet");
+			System.out.println("getphotos func:doGet");
 			String coursename = request.getParameter("name");
 			System.out.println("classname: " + coursename);
-			String tmpcoursename = "zztzzzclass0";
-			List<Course> c = coursedao.findIdByCoursename(coursename);
+			//String tmpcoursename = "zztzzzclass0";
+			List<Course> c = coursedao.findByCoursename(coursename);;
 			//int c = coursedao.findCountByCoursename(tmpcoursename);
-			System.out.println(c);
+			//System.out.println(c);
 			JSONArray jsonArray = new JSONArray();
 			for(Course t:c) {
-				Set<Photo> photos = t.getPhotoSet();
+				//Set<Photo> photos = t.getPhotoSet();
+				List<Photo> photos = em.createNativeQuery("select * from Photo p where course_id = ? order by photo_id desc", Photo.class)
+						.setParameter(1, t.getId())
+						.getResultList();
+				
 				for(Photo p:photos) {
 					
 					int id = p.getId();
@@ -62,7 +71,7 @@ public class getPhotoDetail extends HttpServlet{
 					o.put("time", time.toString());
 					o.put("num", total);
 					o.put("focus", concentrated);
-					System.out.println(o);
+					//System.out.println(o);
 					jsonArray.add(o);
 				}
 			}
