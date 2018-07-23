@@ -78,6 +78,7 @@ public class getAtmosphere extends HttpServlet{
 		String res = String.format("尊敬的老师，你%s课的平均出勤率为%s，平均专注听课率为%s，课堂氛围%s，老师您%s", coursename, atte, conc, atmosphere, suggestion);
 		
 		PrintWriter out = response.getWriter();
+		response.setContentType("text/html;charset=utf-8");
 		out.print(res);
         out.flush();
         out.close();
