@@ -106,12 +106,8 @@ var config3 = {
 class Detail extends Component {
   constructor(props){
     super(props);
-    var username = this.props.location.username;
-    var classname = this.props.location.classname;
-    console.log(classname);
     this.state = {
-      username:username,
-      classname:classname
+      classname:localstorage.getItem('classname');
     };
     this.getdetail=this.getdetail.bind(this);
   }
@@ -123,7 +119,7 @@ class Detail extends Component {
       <div>
         <Headbar className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"/>
         <div className="row">
-          <Sidebar username={this.state.username}/>
+          <Sidebar/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
                 <Content classname={this.state.classname}/>
@@ -161,6 +157,12 @@ class Content extends Component{
            lineChartData: JSON.parse(data),
         });
     }.bind(this));
+    this.serverRequest = $.post("/getAtmosphere",{coursename:this.props.classname},function(data){
+      console.log("getAtmosphere="+data);
+      this.setState({
+           atmosphere: JSON.parse(data),
+        });
+    }.bind(this));
   }
   onRowClick(row){
     config1.series[0].data[0] = this.state.lineChartData[0];
@@ -195,7 +197,7 @@ class Content extends Component{
       <div>
         <Panel bsStyle="info">
           <Panel.Heading>
-            <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+            <Panel.Title componentClass="h3">课程名称：{this.props.classname}</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
             <BootstrapTable  className="col-lg-6" data={ this.state.photoInfo } options={options} align={"center"} striped={ true } pagination={true} search={ true } version='4'>
@@ -227,6 +229,14 @@ class Content extends Component{
             </Panel.Heading>
             <Panel.Body>
               <ReactHighcharts className="col-lg-12" config={this.state.config1}></ReactHighcharts>
+            </Panel.Body>
+        </Panel>
+        <Panel bsStyle="info">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">课堂氛围及建议：</Panel.Title>
+            </Panel.Heading>
+            <Panel.Body>
+              <h2>{this.state.atmosphere}</h2>
             </Panel.Body>
         </Panel>
       </div>

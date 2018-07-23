@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
-
+import DatePicker from 'react-bootstrap-date-picker';
 import {Panel} from 'react-bootstrap';
 var ReactHighcharts = require('react-highcharts');
 
@@ -78,10 +78,7 @@ var config2 = {
 class Statistics extends Component {
   constructor(props){
     super(props);
-    var passeddata = this.props.location.username;
-    var username = passeddata;
     this.state = {
-      username:username,
       config:config2
     };
     this.getstatistics=this.getstatistics.bind(this);
@@ -100,10 +97,10 @@ class Statistics extends Component {
       <div>
         <Headbar />
         <div className="row">
-          <Sidebar username={this.state.username}/>
+          <Sidebar/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-              <ReactHighcharts config={this.state.config}></ReactHighcharts>
+              <Content/>
               <button onClick={this.change}/>
             </div>
           </main>
@@ -117,23 +114,16 @@ function Content(){
     <div>
       <Panel bsStyle="info">
         <Panel.Heading>
-          <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+          <Panel.Title componentClass="h3">单日统计</Panel.Title>
         </Panel.Heading>
         <Panel.Body>
-          <div className="row">
-            <div className="col-lg-5">
-              <ReactHighcharts config={config1}></ReactHighcharts>
-            </div>
-            <div className="col-lg-5">
-              <ReactHighcharts config={config2}></ReactHighcharts>
-            </div>
-          </div>
+          
         </Panel.Body>
       </Panel>
 
       <Panel bsStyle="info">
         <Panel.Heading>
-          <Panel.Title componentClass="h3">课程名称：</Panel.Title>
+          <Panel.Title componentClass="h3"></Panel.Title>
         </Panel.Heading>
         <Panel.Body>
           <div className="row">

@@ -21,7 +21,7 @@ class Hello extends Component {
       <div>
         <Headbar />
         <div className="row">
-          <Sidebar username={this.state.username}/>
+          <Sidebar/>
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <h1>欢迎使用课堂威视，{this.state.username}</h1>
           </main>
