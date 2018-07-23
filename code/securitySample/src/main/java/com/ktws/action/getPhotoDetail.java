@@ -47,7 +47,7 @@ public class getPhotoDetail extends HttpServlet{
 			String coursename = request.getParameter("name");
 			System.out.println("classname: " + coursename);
 			//String tmpcoursename = "zztzzzclass0";
-			List<Course> c = coursedao.findByCoursename(coursename);;
+			List<Course> c = coursedao.findByCoursename(coursename);
 			//int c = coursedao.findCountByCoursename(tmpcoursename);
 			//System.out.println(c);
 			JSONArray jsonArray = new JSONArray();
