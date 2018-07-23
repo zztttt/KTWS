@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
-import DatePicker from 'react-bootstrap-date-picker';
 import {Panel} from 'react-bootstrap';
 var ReactHighcharts = require('react-highcharts');
 
@@ -130,13 +129,6 @@ class Content extends Component{
             <Panel.Title componentClass="h3">单日统计</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            <DatePicker
-            id="example-datepicker"
-            value={this.state.value}
-            onChange={this.handleChange}
-            dateFormat="YYYY/MM/DD"
-            showClearButton={false}
-            />
           </Panel.Body>
         </Panel>
 

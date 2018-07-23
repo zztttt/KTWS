@@ -5,6 +5,9 @@ import $ from 'jquery';
 class Headbar extends Component {
   constructor(props){
     super(props);
+    this.state={
+      username:null
+    }
     this.serverRequest = $.get("/getusername",function(data){
       this.setState({
            username: JSON.parse(data).username
