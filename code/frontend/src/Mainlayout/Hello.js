@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 import '../Bars/Sidebar.css';
-import {Panel} from 'react-bootstrap';
 import $ from 'jquery';
 class Hello extends Component {
   constructor(props){

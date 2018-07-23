@@ -109,34 +109,54 @@ class Statistics extends Component {
     );
   }
 }
-function Content(){
-  return (
-    <div>
-      <Panel bsStyle="info">
-        <Panel.Heading>
-          <Panel.Title componentClass="h3">单日统计</Panel.Title>
-        </Panel.Heading>
-        <Panel.Body>
-          
-        </Panel.Body>
-      </Panel>
+class Content extends Component{
+  constructor(props) {
+    super(props);
 
-      <Panel bsStyle="info">
-        <Panel.Heading>
-          <Panel.Title componentClass="h3"></Panel.Title>
-        </Panel.Heading>
-        <Panel.Body>
-          <div className="row">
-            <div className="col-lg-5">
-              <ReactHighcharts config={config1}></ReactHighcharts>
+    this.state = { value: '' };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(value, formattedValue) {   //为其自带参数
+    this.setState({
+      value, // ISO String, ex: "2016-11-19T12:00:00.000Z"
+      formattedValue, // Formatted String, ex: "11/19/2016"
+    });
+  }
+  render(){
+    return (
+      <div>
+        <Panel bsStyle="info">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">单日统计</Panel.Title>
+          </Panel.Heading>
+          <Panel.Body>
+            <DatePicker
+            id="example-datepicker"
+            value={this.state.value}
+            onChange={this.handleChange}
+            dateFormat="YYYY/MM/DD"
+            showClearButton={false}
+            />
+          </Panel.Body>
+        </Panel>
+
+        <Panel bsStyle="info">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3"></Panel.Title>
+          </Panel.Heading>
+          <Panel.Body>
+            <div className="row">
+              <div className="col-lg-5">
+                <ReactHighcharts config={config1}></ReactHighcharts>
+              </div>
+              <div className="col-lg-5">
+                <ReactHighcharts config={config2}></ReactHighcharts>
+              </div>
             </div>
-            <div className="col-lg-5">
-              <ReactHighcharts config={config2}></ReactHighcharts>
-            </div>
-          </div>
-        </Panel.Body>
-      </Panel>
-    </div>
-  );
+          </Panel.Body>
+        </Panel>
+      </div>
+    );
+  }
 }
 export default Statistics;

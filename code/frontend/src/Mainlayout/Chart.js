@@ -51,11 +51,11 @@ class Chart extends Component {
                       }
                       localStorage.setItem('classname', record.classname);
                       this.context.router.history.push(path);
-                    }.bind(this)}>Action</a>
+                    }.bind(this)}>详细信息</a>
             <Divider type="vertical" />
-            <a href="javascript:;">Delete</a>
+            <a >Delete</a>
             <Divider type="vertical" />
-            <a href="javascript:;" className="ant-dropdown-link">
+            <a  className="ant-dropdown-link">
               More actions <Icon type="down" />
             </a>
           </span>
