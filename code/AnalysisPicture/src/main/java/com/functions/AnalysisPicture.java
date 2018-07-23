@@ -67,6 +67,7 @@ public class AnalysisPicture {
             while (str.equals("{\"error_message\":\"CONCURRENCY_LIMIT_EXCEEDED\"}")) {
             	// console print to debug
             	System.out.println("post again");
+            	
             	bacd = post(url, map, byteMap);
                 str = new String(bacd);
             }
@@ -89,7 +90,7 @@ public class AnalysisPicture {
 	public String analysisFaceByTokens(String facetoken) throws Exception {
 		String url = "https://api-cn.faceplusplus.com/facepp/v3/face/analyze";
         map.put("face_tokens", facetoken);   
-        map.put("return_attributes", "eyestatus,emotion");
+        map.put("return_attributes", "emotion,eyestatus");
         try {
     		byte[] bacd = post(url, map, byteMap);
     		String str = new String(bacd);
@@ -170,8 +171,9 @@ public class AnalysisPicture {
 		double fear = Double.parseDouble(emotionJson.getString("fear"));
 		double happiness = Double.parseDouble(emotionJson.getString("happiness"));
 		
+		// this flag  judge whether concentrating
 		double flag = 2*happiness + 2*surprise + neutral - 0.6*sadness - 0.6*fear - 0.4*disgust - 0.4*anger;
-		if (flag > 0.7)
+		if (flag > 1)
 			return true;
 		else 
 			return false;
@@ -192,11 +194,13 @@ public class AnalysisPicture {
 			return "no face found in mark photo";
 		
 		// arguments for python cmd line
-		String args = "python D:\\markPicture.py "; // py code path
+		//String args = "python D:\\markPicture.py "; // py code path
 		
 		//String codepath = AnalysisPicture.class.getResource("/").getPath();
 		String codepath = System.getProperty("user.dir");
-		System.out.println(codepath);
+		System.out.println("codepath:"+codepath);
+		codepath += "\\src\\main\\resources\\markPicture.py ";
+		String args = "python "+codepath;
 		args += filepath; // file path with file name
 		for (int i=0; i<count; i++) {
 			JSONObject face = JSONObject.fromObject(faceset.get(i));
@@ -208,7 +212,7 @@ public class AnalysisPicture {
         	args += " "+left+" "+top+" "+width;
 		}
 
-		//System.out.println(args);
+		System.out.println(args);
     	
     	try {
     		Process proc = Runtime.getRuntime().exec(args);
@@ -228,6 +232,7 @@ public class AnalysisPicture {
 		
 		return "mark ok";
 	}
+	
 	/*
 	 * this is original
 	 * */

@@ -112,6 +112,7 @@ public class AnalysisPictureTest extends TestCase {
     	}
 	}
 */
+	
 	public void testAnalysisFaceByTokens() throws Exception {
 		//System.out.println("in All\n");
 		String detectStr = ap.detectByPath(thisPath+"4.jpg");
@@ -150,8 +151,9 @@ public class AnalysisPictureTest extends TestCase {
 		String detectStr = ap.detectByPath(thisPath+"4.jpg");
 		//System.out.println(thisPath+"4.jpg");
 		String res = ap.markPhoto(thisPath+"4.jpg", detectStr);
-		//System.out.println(res);
-		File file = new File(thisPath + "marked/4.jpg");//为啥变成jpeg了
+		System.out.println(res);
+		assertFalse(!res.equals("mark ok"));
+		File file = new File(thisPath + "marked/4.jpg");
 		assertFalse(!file.exists());
 	}
 
