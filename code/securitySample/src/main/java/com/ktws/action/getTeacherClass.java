@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,13 +42,14 @@ public class getTeacherClass extends HttpServlet{
 		super();
 	}
 	
-	@RequestMapping(value="/getclasses",method=RequestMethod.POST)
+	@RequestMapping(value="/getclasses",method=RequestMethod.GET)
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
 			PrintWriter out = response.getWriter();
-			
-			String userName = request.getParameter("name");
-			//System.out.println("user:"+userName);
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+
+			String userName = userDetails.getUsername();
+			System.out.println("user:"+userName);
 			
 			JSONArray jsonArray = new JSONArray();
 			

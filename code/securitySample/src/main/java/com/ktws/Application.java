@@ -13,49 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ktws.Entity.User;
-import com.ktws.Grab.Grab;
 import com.ktws.Dao.UserDao;
 
 @SpringBootApplication
 @RestController
-public class KtwsApplication {
+public class Application {
 	@Autowired
 	UserDao userdao;
 	
 	public static void main(String[] args) {
 		
-		SpringApplication.run(KtwsApplication.class, args);
-		
-		new Thread(new Runnable() {
-			public void run() {
-				try {
-					Grab g = new Grab();					
-					g.grab(0,"zztzzzclass0");  // here is class name, but not good 
-				} catch (java.lang.Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}).start();
-		/*
-		 * need two stop, or org.springframework.beans.factory.BeanCreationException
-		 */
-		
-		/*
-		new Thread(new Runnable() {
-			public void run() {
-				try {
-					Grab g = new Grab();					
-					g.grab(1,"zztzzzclass1");  // here is class name, but not good 
-				} catch (java.lang.Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}).start(); */
+		SpringApplication.run(Application.class, args);
 	}
-	
-	
 	@RequestMapping("/getuser")  
     public List<User> getUser(){  
         List<User> users = userdao.findAll();
