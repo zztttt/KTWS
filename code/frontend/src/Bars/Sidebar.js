@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './Sidebar.css';
 import PropTypes from 'prop-types';
 class Sidebar extends Component {
+  constructor(props){
+    super(props);
+  }
   static contextTypes={
     router:PropTypes.object
   }
