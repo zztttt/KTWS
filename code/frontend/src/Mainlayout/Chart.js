@@ -49,8 +49,7 @@ class Chart extends Component {
                       var path = {  
                         pathname: '/Detail', 
                       }
-                      localstorage.setItem('username', username);
-                      var user = localstorage.getItem('username');
+                      localStorage.setItem('classname', record.classname);
                       this.context.router.history.push(path);
                     }.bind(this)}>Action</a>
             <Divider type="vertical" />

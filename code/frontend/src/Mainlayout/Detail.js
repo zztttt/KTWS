@@ -107,7 +107,7 @@ class Detail extends Component {
   constructor(props){
     super(props);
     this.state = {
-      classname:localstorage.getItem('classname');
+      classname:localStorage.getItem('classname')
     };
     this.getdetail=this.getdetail.bind(this);
   }
