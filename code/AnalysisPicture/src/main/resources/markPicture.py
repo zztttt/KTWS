@@ -20,19 +20,19 @@ def markPicture(filepath, points):
         top = points[3*i+1]
         width = points[3*i+2]
         draw.rectangle((left, top, left+width, top+width),None, (0,50,255))
-    img.show()
+    #img.show()
 
     try:
-        img.save(tmpfilepath+"/marked/"+filename[:-(len(img.format))]+"-marked."+img.format)
+        img.save(tmpfilepath+"/marked/"+filename)
     except FileNotFoundError:
         os.mkdir(tmpfilepath+"/marked")
-        img.save(tmpfilepath+"/marked/"+filename[:-(len(img.format))]+"-marked."+img.format)
+        img.save(tmpfilepath+"/marked/"+filename)
 
     return "success"
 
 if __name__ == '__main__':
     #filepath = "E:/SummerProject/photo/4.jpg"
-    #points = [247,115,81,44,134,76,132,180,69]
+    #points = [247,115,81,44,134,76,132,180,69] 247 115 81 44 134 76 132 180 69
 
     filepath = sys.argv[1]
     points = []
