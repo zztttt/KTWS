@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 import {Panel} from 'react-bootstrap';
+import { DatePicker } from 'antd';
+import $ from 'jquery';
+
 var ReactHighcharts = require('react-highcharts');
 
 var config1 = {
@@ -112,25 +115,27 @@ class Content extends Component{
   constructor(props) {
     super(props);
 
-    this.state = { value: '' };
+    this.state = { 
+      value: '',
+      date:null,
+      photoInfo:null
+     };
     this.handleChange = this.handleChange.bind(this);
   }
-  handleChange(value, formattedValue) {   //为其自带参数
-    this.setState({
-      value, // ISO String, ex: "2016-11-19T12:00:00.000Z"
-      formattedValue, // Formatted String, ex: "11/19/2016"
-    });
+  handleChange(date, dateString) {
+    this.serverRequest = $.post("/getStatisticsByDay",{date:dateString},function(data){
+      console.log(data);
+      this.setState({
+           photoInfo: JSON.parse(data),
+        });
+    }.bind(this));
   }
   render(){
+    const dateFormat = 'YYYY/MM/DD';
     return (
       <div>
-        <Panel bsStyle="info">
-          <Panel.Heading>
-            <Panel.Title componentClass="h3">单日统计</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body>
-          </Panel.Body>
-        </Panel>
+        <DatePicker value={this.state.date} onChange={this.handleChange} format={dateFormat} />
+
 
         <Panel bsStyle="info">
           <Panel.Heading>

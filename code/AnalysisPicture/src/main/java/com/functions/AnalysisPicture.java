@@ -58,7 +58,7 @@ public class AnalysisPicture {
         	}
           	byte[] buff = getBytesFromFile(file);
         	map.put("return_landmark", "0"); 
-            map.put("return_attributes", "emotion");
+            map.put("return_attributes", "emotion,eyestatus");
             byteMap.put("image_file", buff);
             byte[] bacd = post(url, map, byteMap);
             String str = new String(bacd);
@@ -116,7 +116,8 @@ public class AnalysisPicture {
 				JSONObject face = JSONObject.fromObject(faceset.get(i));
 				JSONObject attributes = (JSONObject)face.get("attributes");
 				String oneEmotion = attributes.get("emotion").toString();
-				if (emotionDeal(oneEmotion)) {
+				String oneEyestatus = attributes.get("eyestatus").toString();
+				if (emotionDeal(oneEmotion, oneEyestatus)) {
 					concentrate += 1;
 				}
 			}
@@ -145,7 +146,8 @@ public class AnalysisPicture {
 						JSONObject face = JSONObject.fromObject(analysisArray.get(j));
 						JSONObject attributes = (JSONObject)face.get("attributes");
 						String oneEmotion = attributes.get("emotion").toString();
-						if (emotionDeal(oneEmotion)) {// judge emotion
+						String oneEyestatus = attributes.get("eyestatus").toString();
+						if (emotionDeal(oneEmotion, oneEyestatus)) {// judge emotion
 							concentrate += 1;
 						}
 					}
@@ -161,7 +163,7 @@ public class AnalysisPicture {
 		return res.toString();
 	}
 	
-	private boolean emotionDeal(String emotion) {
+	private boolean emotionDeal(String emotion, String eyestatus) {
 		JSONObject emotionJson = JSONObject.fromObject(emotion);
 		double sadness = Double.parseDouble(emotionJson.getString("sadness"));
 		double neutral = Double.parseDouble(emotionJson.getString("neutral"));
@@ -172,8 +174,17 @@ public class AnalysisPicture {
 		double happiness = Double.parseDouble(emotionJson.getString("happiness"));
 		
 		// this flag  judge whether concentrating
-		double flag = 2*happiness + 2*surprise + neutral - 0.6*sadness - 0.6*fear - 0.4*disgust - 0.4*anger;
-		if (flag > 1)
+		double emotionFlag = 2*happiness + 2*surprise + neutral + 0.6*sadness + 0.6*fear + 0.4*disgust + 0.4*anger;
+		
+		JSONObject eyeJson = JSONObject.fromObject(eyestatus);
+		JSONObject leftJson = JSONObject.fromObject(eyeJson.get("left_eye_status"));
+		JSONObject rightJson = JSONObject.fromObject(eyeJson.get("right_eye_status"));
+		//System.out.println(leftJson.toString());
+		double eyeOpen = Double.parseDouble(leftJson.getString("normal_glass_eye_open")) + Double.parseDouble(leftJson.getString("no_glass_eye_open"))
+						+ Double.parseDouble(rightJson.getString("normal_glass_eye_open")) + Double.parseDouble(rightJson.getString("no_glass_eye_open"));
+		//System.out.printf("emotionflag : %f, eye: %f\n", emotionFlag, eyeOpen);
+		
+		if (emotionFlag + eyeOpen > 220) // emotionFlag > 90 && eyeOpen > 140
 			return true;
 		else 
 			return false;
@@ -196,9 +207,9 @@ public class AnalysisPicture {
 		// arguments for python cmd line
 		//String args = "python D:\\markPicture.py "; // py code path
 		
-		//String codepath = AnalysisPicture.class.getResource("/").getPath();
+		//String codepath = AnalysisPicture.class.getResource("/").getPath(); // depressed
 		String codepath = System.getProperty("user.dir");
-		System.out.println("codepath:"+codepath);
+		//System.out.println("codepath:"+codepath);
 		codepath += "\\src\\main\\resources\\markPicture.py ";
 		String args = "python "+codepath;
 		args += filepath; // file path with file name
@@ -212,7 +223,7 @@ public class AnalysisPicture {
         	args += " "+left+" "+top+" "+width;
 		}
 
-		System.out.println(args);
+		//System.out.println(args);
     	
     	try {
     		Process proc = Runtime.getRuntime().exec(args);
