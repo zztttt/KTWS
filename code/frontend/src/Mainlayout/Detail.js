@@ -7,6 +7,8 @@ import {Panel} from 'react-bootstrap';
 import $ from 'jquery';
 
 var ReactHighcharts = require('react-highcharts');
+var atmosphere = ["非常积极","积极","略显消极"];
+var suggestion = ["课堂情况非常好，同学们都爱听您的课，请您继续努力！","上课效果较好，同学们大都认真听讲，请您适当关注课堂氛围，调整教学安排！","最近的课效果不是很理想，同学们兴趣不很高，请您适当调整上课方式与节奏，提高同学们的兴趣！"];
 var config1 = {
   title: {
     text: '近30张照片统计'
@@ -156,7 +158,7 @@ class Content extends Component{
       console.log("getRecentStatistic="+data);
       this.setState({
            lineChartData: JSON.parse(data),
-           num:this.state.lineChartData[0]
+           num:JSON.parse(data)[0]
         });
       config1.series[0].data[0] = this.state.lineChartData[1];
       config1.series[0].data[1] = this.state.lineChartData[3];
@@ -168,8 +170,23 @@ class Content extends Component{
     this.serverRequest = $.post("/getAtmosphere",{coursename:this.props.classname},function(data){
       console.log("getAtmosphere="+data);
       this.setState({
-           atmosphere: data
+           atmosphere: JSON.parse(data),
         });
+      if(this.state.atmosphere[0]>0.8&&this.state.atmosphere[1]>0.8){
+        this.setState({
+           atmospherenum: 0,
+        });
+      }
+      else if(this.state.atmosphere[0]<0.6&&this.state.atmosphere[1]<0.6){
+        this.setState({
+           atmospherenum: 2,
+        });
+      }
+      else{
+        this.setState({
+           atmospherenum: 1,
+        });
+      }
     }.bind(this));
   }
   onRowClick(row){
@@ -238,7 +255,7 @@ class Content extends Component{
               <Panel.Title componentClass="h3">课堂氛围及建议：</Panel.Title>
             </Panel.Heading>
             <Panel.Body>
-              <h2>{this.state.atmosphere}</h2>
+              <h2>尊敬的老师，你{this.props.classname}课的平均出勤率为{this.state.atmosphere[0]*100}%，平均专注听课率为{this.state.atmosphere[1]*100}%，课堂氛围{atmosphere[this.state.atmospherenum]},老师您{suggestion[this.state.atmospherenum]}</h2>
             </Panel.Body>
         </Panel>
       </div>
