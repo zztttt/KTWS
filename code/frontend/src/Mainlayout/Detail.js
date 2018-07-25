@@ -140,7 +140,9 @@ class Content extends Component{
       num:0,
       config1:config1,
       config2:config2,
-      config3:config3
+      config3:config3,
+      atmosphere:[0,0],
+      atmospherenum:0
     };
     this.serverRequest = $.post("/getphotos",{name:this.props.classname},function(data){
       console.log(data);
