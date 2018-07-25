@@ -129,11 +129,12 @@ class Content extends Component{
       this.setState({
            dayStatistics: JSON.parse(data),
         });
+      for(var i=0;i<6;i++){
+        config1.series[0].data[i] = this.state.dayStatistics[2*i+1];
+        config1.series[1].data[i] = this.state.dayStatistics[2*i+2];
+      }
     }.bind(this));
-    for(var i=0;i<6;i++){
-      config1.series[0].data[i] = this.state.dayStatistics[2*i+1];
-      config1.series[1].data[i] = this.state.dayStatistics[2*i+2];
-    }
+
     this.setState({
       num:this.state.dayStatistics[0],
       config1:config1
