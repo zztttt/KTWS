@@ -160,7 +160,7 @@ class Content extends Component{
     this.serverRequest = $.post("/getAtmosphere",{coursename:this.props.classname},function(data){
       console.log("getAtmosphere="+data);
       this.setState({
-           atmosphere: JSON.parse(data),
+           atmosphere: data,
         });
     }.bind(this));
   }

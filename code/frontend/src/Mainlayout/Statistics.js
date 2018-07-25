@@ -114,11 +114,12 @@ class Statistics extends Component {
 class Content extends Component{
   constructor(props) {
     super(props);
-
     this.state = { 
       value: '',
       date:null,
-      photoInfo:null
+      dayStatistics:null,
+      config1:config1,
+      num:0
      };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -126,9 +127,16 @@ class Content extends Component{
     this.serverRequest = $.post("/getStatisticsByDay",{date:dateString},function(data){
       console.log(data);
       this.setState({
-           photoInfo: JSON.parse(data),
+           dayStatistics: JSON.parse(data),
         });
     }.bind(this));
+    for(var i=0;i<6;i++){
+      config1.series[0].data[i] = this.state.dayStatistics[i+1];
+    }
+    this.setState({
+      num:this.state.dayStatistics[0],
+      config1:config1
+    })
   }
   render(){
     const dateFormat = 'YYYY/MM/DD';
@@ -139,12 +147,12 @@ class Content extends Component{
 
         <Panel bsStyle="info">
           <Panel.Heading>
-            <Panel.Title componentClass="h3"></Panel.Title>
+            <Panel.Title componentClass="h3">{this.state.num}</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
             <div className="row">
               <div className="col-lg-5">
-                <ReactHighcharts config={config1}></ReactHighcharts>
+                <ReactHighcharts config={this.state.config1}></ReactHighcharts>
               </div>
               <div className="col-lg-5">
                 <ReactHighcharts config={config2}></ReactHighcharts>
