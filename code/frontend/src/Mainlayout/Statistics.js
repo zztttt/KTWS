@@ -19,7 +19,7 @@ var config1 = {
       text: 'Day'
     },
     categories: [
-      'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      '1', '2', '3', '4', '5', '6']
   },
   tooltip: {
     valueSuffix: '人'
@@ -32,11 +32,11 @@ var config1 = {
   },
   series: [
     {
-      name: 'math', 
-      data: [7,8,9,11,2,5,6]
+      name: '出勤率', 
+      data: [7,8,9,11,2,5]
     }, {
-      name: 'Chinese', 
-      data: [5,4,8,10,9,3,7]
+      name: '专注率', 
+      data: [5,4,8,10,9,3]
     }],
 }
 var config2 = {
@@ -131,7 +131,8 @@ class Content extends Component{
         });
     }.bind(this));
     for(var i=0;i<6;i++){
-      config1.series[0].data[i] = this.state.dayStatistics[i+1];
+      config1.series[0].data[i] = this.state.dayStatistics[2*i+1];
+      config1.series[1].data[i] = this.state.dayStatistics[2*i+2];
     }
     this.setState({
       num:this.state.dayStatistics[0],
