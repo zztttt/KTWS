@@ -135,6 +135,7 @@ class Content extends Component{
     super(props);
     this.onRowClick=this.onRowClick.bind(this);
     this.state = {
+      num:0,
       config1:config1,
       config2:config2,
       config3:config3
@@ -155,22 +156,23 @@ class Content extends Component{
       console.log("getRecentStatistic="+data);
       this.setState({
            lineChartData: JSON.parse(data),
+           num:this.state.lineChartData[0]
         });
+      config1.series[0].data[0] = this.state.lineChartData[1];
+      config1.series[0].data[1] = this.state.lineChartData[3];
+      config1.series[0].data[2] = this.state.lineChartData[5];
+      config1.series[1].data[0] = this.state.lineChartData[2];
+      config1.series[1].data[1] = this.state.lineChartData[4];
+      config1.series[1].data[2] = this.state.lineChartData[6];
     }.bind(this));
     this.serverRequest = $.post("/getAtmosphere",{coursename:this.props.classname},function(data){
       console.log("getAtmosphere="+data);
       this.setState({
-           atmosphere: data,
+           atmosphere: data
         });
     }.bind(this));
   }
   onRowClick(row){
-    config1.series[0].data[0] = this.state.lineChartData[0];
-    config1.series[0].data[1] = this.state.lineChartData[2];
-    config1.series[0].data[2] = this.state.lineChartData[4];
-    config1.series[1].data[0] = this.state.lineChartData[1];
-    config1.series[1].data[1] = this.state.lineChartData[3];
-    config1.series[1].data[2] = this.state.lineChartData[5];
     config2.series[0].data[0][1] = (row.focus);
     config2.series[0].data[1][1] = (row.num-row.focus);
     config2.series[0].data[2][1] = (this.state.totalnum-row.num);
@@ -225,7 +227,7 @@ class Content extends Component{
         </Panel>
         <Panel bsStyle="info">
             <Panel.Heading>
-              <Panel.Title componentClass="h3">近30张照片统计：</Panel.Title>
+              <Panel.Title componentClass="h3">近{this.state.num}张照片统计：</Panel.Title>
             </Panel.Heading>
             <Panel.Body>
               <ReactHighcharts className="col-lg-12" config={this.state.config1}></ReactHighcharts>
