@@ -3,6 +3,7 @@ package com.ktws.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -66,24 +67,39 @@ public class getRecentStatistics extends HttpServlet{
 				.setParameter(1, c.getId())
 				.setParameter(2, num)
 				.getResultList();
-		if (photos.size() != num) {
-			System.out.println("getRecentStatistic: photo number not right, photos.size:"+photos.size());
-			return ;
+		
+		JSONArray jsonArray;
+		
+		/*
+		 * if photos.size < 3, return 7*0
+		 * if < 30, use the max power of 3 for num
+		 */
+		if (photos.size() < 3) {
+			Object[] tmp = new Object[] {0,0,0,0,0,0,0};
+			jsonArray = JSONArray.fromObject(tmp);
 		}
-		JSONArray jsonArray = new JSONArray();
-		double tmpTotal = 0;
-		double tmpC = 0;
-		for (int i=0; i<num; i++) {
-			Photo p = photos.get(i);
-			//System.out.println(p.getTotal());
-			tmpTotal += p.getTotal();
-			tmpC += p.getConcentration();
-			if ((i+1) % 10 == 0) {
-				//System.out.println("hh" + tmpTotal/10.0);
-				jsonArray.add(tmpTotal/10.0);
-				jsonArray.add(tmpC/10.0);
-				tmpTotal = 0;
-				tmpC = 0;
+		else {
+			if (photos.size() < num) {
+				System.out.println("getRecentStatistic: photo number not enough");
+				num = photos.size() - photos.size() % 3; 
+			}
+		
+			jsonArray = new JSONArray();
+			jsonArray.add(num);
+			double tmpTotal = 0;
+			double tmpC = 0;
+			for (int i=0; i<num; i++) {
+				Photo p = photos.get(i);
+				//System.out.println(p.getTotal());
+				tmpTotal += p.getTotal();
+				tmpC += p.getConcentration();
+				if ((i+1) % (num/3) == 0) {
+					//System.out.println("hh" + tmpTotal/10.0);
+					jsonArray.add(tmpTotal/(num/3));
+					jsonArray.add(tmpC/(num/3));
+					tmpTotal = 0;
+					tmpC = 0;
+				}
 			}
 		}
 		

@@ -77,7 +77,17 @@ class EditableCell extends React.Component {
 class EditableTable extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { data, editingKey: '' };
+
+    this.state = {
+        data:null,
+        editingKey: ''
+    };
+    this.serverRequest = $.get("/admingetuserinfo",function(data){
+        console.log(data);
+        this.setState({
+            data: JSON.parse(data),
+        });
+    }.bind(this));
     this.columns = [
       {
         title: 'Userid',
@@ -129,7 +139,7 @@ class EditableTable extends React.Component {
               )}
               <Divider type="vertical" />
               <span>
-                <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+                <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record)}>
                   <a href="javascript:;">Delete</a>
                 </Popconfirm>
               </span>
@@ -139,9 +149,27 @@ class EditableTable extends React.Component {
       },
     ];
   }
-  handleDelete = (key) => {
+  handleDelete = (record) => {
+    console.log(record.key);
+    var index = record.key - 1 ;
     const data = [...this.state.data];
-    this.setState({ data: data.filter(item => item.key !== key) });
+    var deleteData = data[index];
+    console.log(deleteData);
+    var i = 0;
+    var newData = [];
+    for( ; i < data.length; i ++){
+
+        if( i !== index){
+            console.log(i);
+            newData.push(data[i]);
+        }
+    }
+    console.log(newData);
+    this.setState({ data: newData });
+    var username = deleteData.username;
+    this.serverRequest = $.post("/admindeleteuserinfo",{username:username},function(data){
+        console.log(data);
+    }.bind(this));
   }
 
   isEditing = (record) => {
@@ -166,6 +194,16 @@ class EditableTable extends React.Component {
           ...row,
         });
         this.setState({ data: newData, editingKey: '' });
+       // console.log(this.state.data[index]);
+        var user = newData[index];
+        console.log(user);
+        var username = user.username;
+        var password = user.password;
+        var user_id = user.user_id;
+        console.log("password:"+password);
+        this.serverRequest = $.post("/adminedituserinfo",{username:username, password:password, user_id:user_id},function(data){
+            console.log(data);
+        }.bind(this));
       } else {
         newData.push(row);
         this.setState({ data: newData, editingKey: '' });

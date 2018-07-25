@@ -43,7 +43,8 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
         	.antMatchers("/signup").permitAll()
         	.antMatchers("/login/**").permitAll()
         	.antMatchers("/user/**").hasRole("USER")
-        	.antMatchers("/admin").hasRole("ADMIN")
+        	.antMatchers("/admin/**").hasRole("ADMIN")
+        	//.antMatchers("/").hasRole("ADMIN")
         	.anyRequest().authenticated()
         	.and()
         	.formLogin()
@@ -96,6 +97,6 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
 	    if (auth != null) {
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
 	    }
-	    return "redirect:/login.html?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+	    return "redirect:/admin/index.html";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
 	}
 }
