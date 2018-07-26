@@ -76,6 +76,7 @@ public class getTeacherClass extends HttpServlet{
 				jsonO.put("frequency", classroom.getShot_interval());
 				jsonO.put("open", "Y");
 				
+				
 				jsonArray.add(jsonO);
 			}
 			//System.out.println(jsonArray.toString());

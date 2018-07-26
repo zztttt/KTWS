@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name="course")
-public class Course {
+public class Course implements Comparable<Course>{
 
 	@Id  
 	@Column(name="course_id")
@@ -48,6 +48,15 @@ public class Course {
 	public void addPhoto(Photo photo){  
 		photo.setCourse(this); //因为course是关系维护端 
         this.photoSet.add(photo);  
+    }
+	
+	@Override
+    public int compareTo(Course c) {
+        //自定义比较方法，如果认为此实体本身大则返回1，否则返回-1
+        if(this.id < c.getId()){
+            return 1;
+        }
+        return -1;
     }
 	
 	public String getCoursename() {

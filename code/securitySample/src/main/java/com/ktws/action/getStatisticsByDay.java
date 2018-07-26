@@ -2,6 +2,8 @@ package com.ktws.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -70,8 +72,10 @@ public class getStatisticsByDay extends HttpServlet{
 		}
 		
 		Set<Course> sc = u.getCourseSet();
+		List<Course> lc = new ArrayList<>(sc);
+		Collections.sort(lc);
 		List<Photo> photos = null;
-		for (Course c :sc) {
+		for (Course c :lc) {
 			if (photos == null) {
 				photos = em.createNativeQuery("select * from Photo p where p.course_id = ? and p.date=?", Photo.class)
 						.setParameter(1, c.getId())
