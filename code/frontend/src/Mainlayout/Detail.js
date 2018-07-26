@@ -256,7 +256,7 @@ class Content extends Component{
               <Panel.Title componentClass="h3">课堂氛围及建议：</Panel.Title>
             </Panel.Heading>
             <Panel.Body>
-              <h2>尊敬的老师，你{this.props.classname}课的平均出勤率为{this.state.atmosphere[0]*100}%，平均专注听课率为{this.state.atmosphere[1]*100}%，课堂氛围{atmosphere[this.state.atmospherenum]},老师您{suggestion[this.state.atmospherenum]}</h2>
+              <h2>尊敬的老师，你{this.props.classname}课的平均出勤率为{(this.state.atmosphere[0]*100).toFixed(2)}%，平均专注听课率为{(this.state.atmosphere[1]*100).toFixed(2)}%，课堂氛围{atmosphere[this.state.atmospherenum]},老师您{suggestion[this.state.atmospherenum]}</h2>
             </Panel.Body>
         </Panel>
       </div>

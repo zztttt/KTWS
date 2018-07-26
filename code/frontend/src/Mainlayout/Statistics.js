@@ -119,31 +119,26 @@ class Content extends Component{
         config1.series[0].data[i] = this.state.dayStatistics[2*i+1];
         config1.series[1].data[i] = this.state.dayStatistics[2*i+2];
       }
+      config1.title.text = dateString + "日课堂情况统计";
+      this.setState({
+        num:this.state.dayStatistics[0],
+        config1:config1
+      })
     }.bind(this));
-
-    this.setState({
-      num:this.state.dayStatistics[0],
-      config1:config1
-    })
   }
   render(){
     const dateFormat = 'YYYY/MM/DD';
     return (
       <div>
         <DatePicker value={this.state.date} onChange={this.handleChange} format={dateFormat} />
-
-
         <Panel bsStyle="info">
           <Panel.Heading>
             <Panel.Title componentClass="h3">{this.state.num}</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
             <div className="row">
-              <div className="col-lg-5">
+              <div className="col-lg-12">
                 <ReactHighcharts config={this.state.config1}></ReactHighcharts>
-              </div>
-              <div className="col-lg-5">
-                <ReactHighcharts config={config2}></ReactHighcharts>
               </div>
             </div>
           </Panel.Body>
