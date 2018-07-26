@@ -44,6 +44,9 @@ public class User implements Serializable{
 		course.setUser(this); //因为course是关系维护端 
         this.courseSet.add(course);  
     }
+	public void deleteCourse(Course course) {
+		this.courseSet.remove(course);
+	}
 	/******************************/
 	
 	public void setId(int id) {
