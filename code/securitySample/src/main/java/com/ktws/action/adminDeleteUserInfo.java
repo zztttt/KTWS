@@ -2,6 +2,7 @@ package com.ktws.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ktws.Dao.UserDao;
+import com.ktws.Entity.Course;
 import com.ktws.Entity.User;
 
 @RestController
@@ -38,6 +40,7 @@ public class adminDeleteUserInfo extends HttpServlet{
 			
 			User u = userdao.findByName(username);
 			Boolean isValid  = false;
+			
 			if( u != null) {
 				userdao.delete(u);
 				isValid = true;

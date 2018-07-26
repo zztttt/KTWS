@@ -39,12 +39,16 @@ public class adminGetUserInfo extends HttpServlet{
             response.setContentType("text/html;charset=utf-8");
             
 			List<User> users = userdao.findAll();
-			System.out.println(users);
+			
 			
 			JSONArray jsonArray = new JSONArray();
 			int i = 1;
 			for( User user:users ) {
 				//System.out.println(user);
+				if(user.getRole() != null) {
+					if(user.getRole().equals("ROLE_ADMIN"))
+						continue;
+				}
 				JSONObject o = new JSONObject();
 				o.put("key", i);
 				o.put("user_id", user.getId());
@@ -53,6 +57,7 @@ public class adminGetUserInfo extends HttpServlet{
 				jsonArray.add(o);
 				i++;
 			}
+			System.out.println("jsonarray:" + jsonArray.toString());
 			out.println(jsonArray.toString());	
 			out.flush();
 			out.close();
