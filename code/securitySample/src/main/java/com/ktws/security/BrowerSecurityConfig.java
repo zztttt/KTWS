@@ -4,20 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	MyUserDetailsService userDetailsService;
-	
+	@Autowired
+	LoginSuccessHandle loginSuccessHandle;
 	/*@Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()                    //  定义当需要用户登录时候，转到的登录页面。
@@ -50,7 +45,8 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
         	.formLogin()
         	.loginPage("/login.html") //  定义当需要用户登录时候，转到的登录页面。
         	//.defaultSuccessUrl("/getuser")
-        	.loginProcessingUrl("/user/login")
+        	.loginProcessingUrl("/user/login").permitAll()
+        	.successHandler(loginSuccessHandle)
         	.and()
             .authorizeRequests()        // 定义哪些URL需要被保护、哪些不需要被保护
             .anyRequest()               // 任何请求,登录后可以访问
