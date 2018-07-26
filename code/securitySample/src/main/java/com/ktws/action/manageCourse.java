@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ktws.Dao.CourseDao;
-import com.ktws.Dao.PhotoDao;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @RestController
 public class manageCourse extends HttpServlet{
