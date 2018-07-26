@@ -46,7 +46,7 @@ public class getTotalNum extends HttpServlet{
 			System.out.println("func:doPOST");
 			String coursename = request.getParameter("name");
 			System.out.println("coursename: " + coursename);
-			int totalNum = coursedao.findToalByCoursename(coursename);
+			int totalNum = coursedao.findTotalByCoursename(coursename);
 			System.out.println(totalNum);
 			JSONArray jsonArray = new JSONArray();
 			JSONObject o = new JSONObject();

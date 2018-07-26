@@ -140,7 +140,9 @@ class Content extends Component{
       num:0,
       config1:config1,
       config2:config2,
-      config3:config3
+      config3:config3,
+      atmosphere:[0,0],
+      atmospherenum:0
     };
     this.serverRequest = $.post("/getphotos",{name:this.props.classname},function(data){
       console.log(data);
@@ -197,7 +199,6 @@ class Content extends Component{
     config3.series[1].data[0] = (row.num-row.focus);
     config3.series[2].data[0] = (this.state.totalnum-row.num);
     this.setState({
-      config1:config1,
       config2:config2,
       config3:config3,
     })
