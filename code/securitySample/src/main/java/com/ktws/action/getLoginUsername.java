@@ -2,7 +2,6 @@ package com.ktws.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -28,14 +27,15 @@ import com.ktws.Entity.User;
 
 @RestController
 public class getLoginUsername extends HttpServlet{
-	
-	@Autowired
-	PhotoDao photodao;
 
 	private static final long serialVersionUID = -951797589435947420L;
 	public getLoginUsername() {
 		super();
 	}
+	
+	@Autowired
+	protected PhotoDao pd;
+	
 	@RequestMapping(value="/getusername",method=RequestMethod.GET)
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
@@ -51,13 +51,11 @@ public class getLoginUsername extends HttpServlet{
             out.flush();
             out.close();
             
-            List<Photo> photolist = photodao.findAll();
-            System.out.println(photolist);
-            for(Photo p : photolist) {
-            	SimpleDateFormat f = new SimpleDateFormat("EE",Locale.US);
-            	String res = f.format(p.getDate());
-            	System.out.printf("%s, %s\n", p.getDate(), res);
-            }
+            /*
+            List<Photo> l = pd.findAll();
+            for (Photo p: l) {
+                System.out.printf("%s, %s\n",p.getDate(),new SimpleDateFormat("EE",Locale.US).format(p.getDate()));
+            }*/
 		}
 		catch(Exception ex) {
 			

@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import './Sidebar.css';
+import $ from 'jquery';
+
 class Headbar extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      username:null
+    }
+    this.serverRequest = $.get("/getusername",function(data){
+      this.setState({
+           username: JSON.parse(data).username
+        });
+    }.bind(this));
+  }
   render() {
       var str = window.location.href;
       console.log("href: " + str);
@@ -12,7 +25,7 @@ class Headbar extends Component {
     return (
       <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Menus</a>
-        <input className="form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"/>
+        <a className="form-control-dark w-100">{this.state.username}</a>
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap">
               <a className="nav-link" href= { h }>Sign out</a>

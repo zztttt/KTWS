@@ -2,60 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录页面</title>
-    <style type="text/css">
-		h2 {color: purple;}
-		p {font-size: smaller; color: gray;}
-	</style>
+    <title>Signup</title>
+    <link rel="stylesheet" type="text/css" href="./login/signup.style.css">
 </head>
 <body>
-    <h2 align="center">自定义注册页面</h2>
+<div id="content">
+    <div class="signup-header">
+        <text>课堂威视注册系统</text>
+    </div>
     <form action="/signup"  method="post">
-        <table  align="center">
-            <tbody>
-                <tr>
-                    <td>用户名：</td>
-                    <td><input style="display:block;
-    						    width:250px;
-    						    height:40px;
-    						    line-height:40px;
-    						    margin:0 auto;
-    						    margin-bottom: 10px;
-    						    outline:none;
-    						    border:1px solid #888;
-    						    padding:10px;
-    						    box-sizing:border-box;" type="text" name="username"></td>
-                </tr>
-                <tr>
-                    <td>密码：</td>
-                    <td><input style="display:block;
-                                width:250px;
-                                height:40px;
-                                line-height:40px;
-                                margin:0 auto;
-                                margin-bottom: 10px;
-                                outline:none;
-                                border:1px solid #888;
-                                padding:10px;
-                                box-sizing:border-box;" type="password" name="password"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button style="display:block;
-                                        width:250px;
-                                        height:40px;
-                                        line-height: 40px;
-                                        margin:0 auto;
-                                        border:none;
-                                        background-color: #2d65b8;
-                                        color:#fff;
-                                        font-size:16px;
-                                        margin-bottom:5px;
-                                        margin-right:0px" 
-                                        type="submit">注册</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="signup-input-box">
+            <span class="icon">用户名:&nbsp;</span>
+            <input type="text" placeholder=" 请 输 入 用 户 名" name="username">
+        </div>
+        <div class="remember-box">
+        </div>
+        <div class="signup-input-box">
+            <span class="icon">密&nbsp;&nbsp;&nbsp;码&nbsp;:</span>
+            <input type="password" placeholder=" 请 输 入 密 码" name="password">
+        </div>
+        <div class="remember-box">
+        </div>
+        <div class="signup-button-box">
+            <button type="submit">注册</button>
+        </div>
     </form>
+</div>
 </body>
 </html>

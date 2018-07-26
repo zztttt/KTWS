@@ -6,8 +6,6 @@ import Chart from './Mainlayout/Chart';
 import Statistics from './Mainlayout/Statistics';
 import Report from './Mainlayout/Report';
 import Detail from './Mainlayout/Detail';
-import Login from './Login/Login';
-import registerServiceWorker from './registerServiceWorker';
 import {Route,HashRouter, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 ReactDOM.render((

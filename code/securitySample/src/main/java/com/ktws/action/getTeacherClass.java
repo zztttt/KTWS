@@ -12,10 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ktws.Dao.PhotoDao;
 import com.ktws.Dao.UserDao;
 import com.ktws.Entity.Classroom;
 import com.ktws.Entity.Course;
@@ -39,30 +42,31 @@ public class getTeacherClass extends HttpServlet{
 		super();
 	}
 	
-	@RequestMapping(value="/getclasses",method=RequestMethod.POST)
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	@RequestMapping(value="/getclasses",method=RequestMethod.GET)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
 			PrintWriter out = response.getWriter();
-			
-			String userName = request.getParameter("name");
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+
+			String userName = userDetails.getUsername();
 			System.out.println("user:"+userName);
 			
 			JSONArray jsonArray = new JSONArray();
 			
 			User user = userdao.findByName(userName);
-			if(user == null) {
-				System.out.println("fjjsb");
-				System.exit(0);
+			if (user == null) {
+				System.out.println("user null");
+				return;
 			}
 			Set<Course> courseSet = user.getCourseSet();
 			if(courseSet.size() == 0) {
 				System.out.println("set size == 0");
-				System.exit(0);
+				return;
 			}
 			for (Course course:courseSet) {
 				JSONObject jsonO = new JSONObject();
 				jsonO.put("id", course.getId());
-				jsonO.put("classname", course.getCourse_name());
+				jsonO.put("classname", course.getCoursename());
 				jsonO.put("num", course.getTotal());
 				
 				//System.out.println(course.getTime() +" xx "+course.getTotal());

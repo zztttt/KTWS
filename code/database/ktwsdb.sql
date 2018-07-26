@@ -45,7 +45,7 @@ create table Course
 /*==============================================================*/
 create table Photo
 (
-   photo_id             int not null,
+   photo_id             int not null auto_increment,
    course_id            int,
    url                  varchar(100) not null,
    date                 date,

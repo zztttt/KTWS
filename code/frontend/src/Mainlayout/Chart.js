@@ -2,37 +2,17 @@ import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 import $ from 'jquery';
-import { Table, Icon, Divider } from 'antd';
+import { Table } from 'antd';
 import 'antd/dist/antd.css';
 import 'antd/lib/date-picker/style/css'; 
 import PropTypes from 'prop-types';
-var classes = [{
-      key:'1',
-      id: 1,
-      classname: "class1",
-      num: 120,
-      frequency: 5,
-      open:'Y'
-  }, {
-      key:'2',
-      id: 2,
-      classname: "class2", 
-      num: 8,
-      frequency: 20,
-      open:'N'
-  }];
-
-
 class Chart extends Component {
   constructor(props){
     super(props);
-    var passeddata = this.props.location.username;
-    var username = passeddata;
     this.state = {
       classes: null,
-      username:username,
     };
-    this.serverRequest = $.post("/getclasses",{name:this.state.username},function(data){
+    this.serverRequest = $.get("/getclasses",function(data){
       console.log(data);
       this.setState({
            classes: JSON.parse(data),
@@ -68,17 +48,10 @@ class Chart extends Component {
             <a onClick={function(){
                       var path = {  
                         pathname: '/Detail', 
-                        username: this.state.username,
-                        classname: record.classname, 
                       }
+                      localStorage.setItem('classname', record.classname);
                       this.context.router.history.push(path);
-                    }.bind(this)}>Action</a>
-            <Divider type="vertical" />
-            <a href="javascript:;">Delete</a>
-            <Divider type="vertical" />
-            <a href="javascript:;" className="ant-dropdown-link">
-              More actions <Icon type="down" />
-            </a>
+                    }.bind(this)}>详细信息</a>
           </span>
         ),
       }];
@@ -86,7 +59,7 @@ class Chart extends Component {
       <div>
         <Headbar />
         <div className="row">
-          <Sidebar username={this.state.username}/>
+          <Sidebar />
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
               <Table dataSource={this.state.classes} columns={columns} bordered></Table>

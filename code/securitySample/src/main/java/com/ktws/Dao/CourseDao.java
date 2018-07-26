@@ -14,9 +14,13 @@ public interface CourseDao extends JpaRepository<Course, Long> {
 	int findCountByCoursename(String coursename);
 	
 	@Query("select c from course c where c.course_name=?1")
-	List<Course> findIdByCoursename(String tmpcoursename);
-	
+	List<Course> findByCoursename(String tmpcoursename);
 
-	
+	@Query("select c.total from course c where c.course_name=?1")
+	int findTotalByCoursename(String coursename);
+
+	@Query("select c from course c where c.id=?1")
+	Course findByCourseId(int courseId);
+
 	
 }
