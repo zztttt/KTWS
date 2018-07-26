@@ -33,10 +33,10 @@ var config1 = {
   series: [
     {
       name: '出勤率', 
-      data: [7,8,9,11,2,5]
+      data: [0,0,0,0,0,0]
     }, {
       name: '专注率', 
-      data: [5,4,8,10,9,3]
+      data: [0,0,0,0,0,0]
     }],
 }
 var config2 = {
@@ -80,19 +80,6 @@ var config2 = {
 class Statistics extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      config:config2
-    };
-    this.getstatistics=this.getstatistics.bind(this);
-    this.change=this.change.bind(this);
-  }
-  getstatistics(){
-
-  }
-  change(){
-    this.setState({
-      config:config2
-    })
   }
   render() {
     return (
@@ -103,7 +90,6 @@ class Statistics extends Component {
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
               <Content/>
-              <button onClick={this.change}/>
             </div>
           </main>
         </div>
@@ -117,7 +103,7 @@ class Content extends Component{
     this.state = { 
       value: '',
       date:null,
-      dayStatistics:null,
+      dayStatistics:[0,0,0,0,0,0,0,0,0,0,0,0,0],
       config1:config1,
       num:0
      };
