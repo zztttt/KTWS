@@ -9,17 +9,22 @@ var ReactHighcharts = require('react-highcharts');
 
 var config1 = {
   title: {
-    text: '每日上课听讲人数'
+    text: '单日上课听讲人数'
   },
   subtitle: {
     text: '课堂威视'
   },
   xAxis: {
     title: {
-      text: 'Day'
+      text: ''
     },
     categories: [
       '1', '2', '3', '4', '5', '6']
+  },
+  yAxis: {
+    title: {
+      text: '人'
+    }
   },
   tooltip: {
     valueSuffix: '人'

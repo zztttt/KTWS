@@ -18,10 +18,15 @@ var config1 = {
   },
   xAxis: {
     title: {
-      text: 'group'
+      text: ''
     },
     categories: [
       '30~20', '20~10', '10~0']
+  },
+  yAxis: {
+    title: {
+      text: '人'
+    }
   },
   tooltip: {
     valueSuffix: '人'
@@ -68,12 +73,18 @@ var config2 = {
       }],
     } 
 var config3 = {
+  title: {text: '单张照片统计'},
   subtitle: {
     text: '课堂威视'
   },
   xAxis: {
     title: {
-      text: 'groups'
+      text: ''
+    }
+  },
+  yAxis: {
+    title: {
+      text: '人'
     }
   },
   tooltip: {
