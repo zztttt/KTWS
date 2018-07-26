@@ -66,7 +66,7 @@ public class getTeacherClass extends HttpServlet{
 			for (Course course:courseSet) {
 				JSONObject jsonO = new JSONObject();
 				jsonO.put("id", course.getId());
-				jsonO.put("classname", course.getCourse_name());
+				jsonO.put("classname", course.getCoursename());
 				jsonO.put("num", course.getTotal());
 				
 				//System.out.println(course.getTime() +" xx "+course.getTotal());

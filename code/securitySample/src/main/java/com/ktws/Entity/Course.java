@@ -50,10 +50,10 @@ public class Course {
         this.photoSet.add(photo);  
     }
 	
-	public String getCourse_name() {
+	public String getCoursename() {
 		return course_name;
 	}
-	public void setCourse_name(String course_name) {
+	public void setCoursename(String course_name) {
 		this.course_name = course_name;
 	}
 	public int getTotal() {

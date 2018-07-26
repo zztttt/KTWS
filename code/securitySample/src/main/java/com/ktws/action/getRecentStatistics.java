@@ -49,7 +49,7 @@ public class getRecentStatistics extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		int num = 30;
 		
-		System.out.println("getRecentStatistic func:doGet");
+		System.out.println("getRecentStatistic func:doPost");
 		String coursename = request.getParameter("name");
 		if (coursename == null) {
 			System.out.println("getRecentStatistic: Parameter missing");
