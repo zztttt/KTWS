@@ -2,10 +2,6 @@ package com.ktws.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ktws.Dao.PhotoDao;
-import com.ktws.Entity.Photo;
-import com.ktws.Entity.User;
 
 @RestController
 public class getLoginUsername extends HttpServlet{

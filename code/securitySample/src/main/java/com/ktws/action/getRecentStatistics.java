@@ -2,10 +2,7 @@ package com.ktws.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,12 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ktws.Dao.CourseDao;
 import com.ktws.Dao.PhotoDao;
-import com.ktws.Dao.UserDao;
 import com.ktws.Entity.Course;
 import com.ktws.Entity.Photo;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @RestController
 public class getRecentStatistics extends HttpServlet{

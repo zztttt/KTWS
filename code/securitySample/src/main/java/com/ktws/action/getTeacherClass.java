@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ktws.Dao.PhotoDao;
 import com.ktws.Dao.UserDao;
 import com.ktws.Entity.Classroom;
 import com.ktws.Entity.Course;

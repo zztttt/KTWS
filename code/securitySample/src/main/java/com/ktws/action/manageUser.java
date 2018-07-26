@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ktws.Dao.CourseDao;
-import com.ktws.Dao.PhotoDao;
 import com.ktws.Dao.UserDao;
 import com.ktws.Entity.User;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @RestController
 public class manageUser extends HttpServlet{
