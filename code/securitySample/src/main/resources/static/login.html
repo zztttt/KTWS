@@ -5,6 +5,19 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="./login/login.style.css">
 </head>
+<script type="text/javascript">
+	function loadXMLDoc()
+	{	
+		var str = window.location.href;
+	    console.log("href: " + str);
+	    var num = str.indexOf("0");
+	    console.log("num: "+ num);
+	    str = str.substr(0, num-1);
+	    console.log("str:"+str);
+	    var h = str+"8080/signup.html";
+	    window.location = h;
+	}
+</script>
 <body>
 <div id="content">
     <div class="login-header">
