@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Sidebar from '../Bars/Sidebar';
 import Headbar from '../Bars/Headbar';
 import $ from 'jquery';
-import { Table, Icon, Divider } from 'antd';
+import { Table } from 'antd';
 import 'antd/dist/antd.css';
 import 'antd/lib/date-picker/style/css'; 
 import PropTypes from 'prop-types';
@@ -52,12 +52,6 @@ class Chart extends Component {
                       localStorage.setItem('classname', record.classname);
                       this.context.router.history.push(path);
                     }.bind(this)}>详细信息</a>
-            <Divider type="vertical" />
-            <a >Delete</a>
-            <Divider type="vertical" />
-            <a  className="ant-dropdown-link">
-              More actions <Icon type="down" />
-            </a>
           </span>
         ),
       }];
