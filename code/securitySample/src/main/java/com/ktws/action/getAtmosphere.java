@@ -21,8 +21,6 @@ import com.ktws.Dao.CourseDao;
 import com.ktws.Dao.PhotoDao;
 import com.ktws.Entity.Course;
 
-import net.sf.json.JSONArray;
-
 @RestController
 public class getAtmosphere extends HttpServlet{
 
@@ -58,14 +56,8 @@ public class getAtmosphere extends HttpServlet{
 		double concentration = photodao.getConcentration(c.getId());
 		System.out.println("attendance:"+attendance +" concentration:"+concentration);
 		
-		JSONArray jsonArray = new JSONArray();
-		jsonArray.add(attendance);
-		jsonArray.add(concentration);
-		System.out.println(jsonArray.toString());
-		/*
 		String atmosphere = "";
 		String suggestion = "";
-		
 		if (attendance>0.8 && concentration>0.8) {
 			atmosphere = "非常积极";
 			suggestion = "上课非常好，同学们都爱听您的课，请您继续努力！";
@@ -84,12 +76,10 @@ public class getAtmosphere extends HttpServlet{
 		String conc = df.format(concentration);		
 		
 		String res = String.format("尊敬的老师，你%s课的平均出勤率为%s，平均专注听课率为%s，课堂氛围%s，老师您%s", coursename, atte, conc, atmosphere, suggestion);
-		System.out.println(res);
-		*/
 		
 		PrintWriter out = response.getWriter();
-		response.setCharacterEncoding("UTF-8");
-		out.write(jsonArray.toString());
+		response.setContentType("text/html;charset=utf-8");
+		out.print(res);
         out.flush();
         out.close();
 		
