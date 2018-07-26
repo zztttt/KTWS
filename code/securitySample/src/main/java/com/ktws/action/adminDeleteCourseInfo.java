@@ -41,9 +41,13 @@ public class adminDeleteCourseInfo extends HttpServlet{
 			System.out.println("courseId: "+ courseId);
 			Course c = coursedao.findByCourseId(Integer.parseInt(courseId));
 			Boolean isValid  = false;
-			if( c != null) {
+			if(c != null) {
+				User u =c.getUser();
+				//System.out.println(u.getCourseSet().size());
+				u.deleteCourse(c);
 				coursedao.delete(c);
 				isValid = true;
+				//System.out.println(u.getCourseSet().size());
 			}
             out.print(isValid);
             out.flush();

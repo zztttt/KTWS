@@ -58,6 +58,12 @@ public class getAtmosphere extends HttpServlet{
 		double concentration = photodao.getConcentration(c.getId());
 		System.out.println("attendance:"+attendance +" concentration:"+concentration);
 		
+		DecimalFormat df = new DecimalFormat("#.0000");
+		String atte = df.format(attendance);
+		String conc = df.format(concentration);	
+		attendance = Double.parseDouble(atte);
+		concentration = Double.parseDouble(conc);
+		
 		JSONArray jsonArray = new JSONArray();
 		jsonArray.add(attendance);
 		jsonArray.add(concentration);

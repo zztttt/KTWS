@@ -29,7 +29,7 @@ public class User implements Serializable{
 	private String username;
 	
 	/***********************/
-	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="user")  
+	@OneToMany(cascade={CascadeType.PERSIST},mappedBy="user")  
 	private Set<Course> courseSet = new HashSet<Course>();
 	
 	public Set<Course> getCourseSet() {
@@ -45,6 +45,7 @@ public class User implements Serializable{
         this.courseSet.add(course);  
     }
 	public void deleteCourse(Course course) {
+		course.setUser(null);
 		this.courseSet.remove(course);
 	}
 	/******************************/

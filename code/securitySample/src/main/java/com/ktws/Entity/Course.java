@@ -22,7 +22,7 @@ public class Course {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="classroom_id") //指定外键的名称。外键一般都是在关系维护端定义  
 	private Classroom classroom;
 	
