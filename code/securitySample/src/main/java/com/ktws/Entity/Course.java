@@ -34,7 +34,7 @@ public class Course implements Comparable<Course>{
 	private int total;
 	private String time;
 	
-	@OneToMany(mappedBy="course",fetch=FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="course",fetch=FetchType.EAGER)  
 	private Set<Photo> photoSet = new HashSet<Photo>();
 	
 	public Set<Photo> getPhotoSet() {
