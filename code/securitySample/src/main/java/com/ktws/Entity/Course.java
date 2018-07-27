@@ -34,7 +34,7 @@ public class Course implements Comparable<Course>{
 	private int total;
 	private String time;
 	
-	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="course",fetch=FetchType.EAGER)  
+	@OneToMany(mappedBy="course",fetch=FetchType.EAGER)
 	private Set<Photo> photoSet = new HashSet<Photo>();
 	
 	public Set<Photo> getPhotoSet() {
@@ -49,6 +49,7 @@ public class Course implements Comparable<Course>{
 		photo.setCourse(this); //因为course是关系维护端 
         this.photoSet.add(photo);  
     }
+	
 	
 	@Override
     public int compareTo(Course c) {
