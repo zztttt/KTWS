@@ -1,8 +1,6 @@
 package com.ktws.Entity;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +27,7 @@ public class User implements Serializable{
 	private String username;
 	
 	/***********************/
-	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="user")  
+	@OneToMany(cascade={CascadeType.PERSIST},mappedBy="user")  
 	private Set<Course> courseSet = new HashSet<Course>();
 	
 	public Set<Course> getCourseSet() {
@@ -44,6 +42,10 @@ public class User implements Serializable{
 		course.setUser(this); //因为course是关系维护端 
         this.courseSet.add(course);  
     }
+	public void deleteCourse(Course course) {
+		course.setUser(null);
+		this.courseSet.remove(course);
+	}
 	/******************************/
 	
 	public void setId(int id) {

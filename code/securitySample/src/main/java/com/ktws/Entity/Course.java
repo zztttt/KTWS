@@ -15,14 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name="course")
-public class Course {
+public class Course implements Comparable<Course>{
 
 	@Id  
 	@Column(name="course_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="classroom_id") //指定外键的名称。外键一般都是在关系维护端定义  
 	private Classroom classroom;
 	
@@ -34,7 +34,7 @@ public class Course {
 	private int total;
 	private String time;
 	
-	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="course")  
+	@OneToMany(cascade={CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy="course",fetch=FetchType.EAGER)  
 	private Set<Photo> photoSet = new HashSet<Photo>();
 	
 	public Set<Photo> getPhotoSet() {
@@ -50,10 +50,19 @@ public class Course {
         this.photoSet.add(photo);  
     }
 	
-	public String getCourse_name() {
+	@Override
+    public int compareTo(Course c) {
+        //自定义比较方法，如果认为此实体本身大则返回1，否则返回-1
+        if(this.id < c.getId()){
+            return 1;
+        }
+        return -1;
+    }
+	
+	public String getCoursename() {
 		return course_name;
 	}
-	public void setCourse_name(String course_name) {
+	public void setCoursename(String course_name) {
 		this.course_name = course_name;
 	}
 	public int getTotal() {
