@@ -1,7 +1,6 @@
 package com.ktws.Entity;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,8 +14,6 @@ import javax.persistence.ManyToOne;
 
 @Entity(name="photo")
 public class Photo {
-
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name="photo_id")
