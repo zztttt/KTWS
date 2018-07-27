@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="./login/login.style.css">
+</head>
+<script type="text/javascript">
+	function loadXMLDoc()
+	{	
+		var str = window.location.href;
+	    console.log("href: " + str);
+	    var num = str.indexOf("0");
+	    console.log("num: "+ num);
+	    str = str.substr(0, num-1);
+	    console.log("str:"+str);
+	    var h = str+"8080/signup.html";
+	    window.location = h;
+	}
+	alert("login failed")
+</script>
+<body>
+<div id="content">
+    <div class="login-header">
+        <text>课堂威视登陆系统</text>
+    </div>
+    <form action="/user/login"  method="post">
+        <div class="login-input-box">
+            <span class="icon">用户名:&nbsp;</span>
+            <input type="text" placeholder=" 请 输 入 用 户 名" name="username">
+        </div>
+        <div class="login-input-box">
+            <span class="icon">密&nbsp;&nbsp;&nbsp;码&nbsp;:</span>
+            <input type="password" placeholder=" 请 输 入 密 码" name="password">
+        </div>
+        <div class="remember-box">
+        </div>
+        <div class="login-button-box">
+            <button type="submit">登陆</button>
+        </div>
+        <div class="logon-button-box">
+            <button type="button" onclick="loadXMLDoc()">立即注册</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
