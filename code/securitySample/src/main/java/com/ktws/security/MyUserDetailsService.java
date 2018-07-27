@@ -3,20 +3,17 @@ package com.ktws.security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
 
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.ktws.Dao.UserDao;
 
 import com.ktws.Entity.AuthUser;
 import com.ktws.Entity.User;
-//import org.springframework.security.core.userdetails.User;
 
 @Component
 public class MyUserDetailsService implements UserDetailsService {

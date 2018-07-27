@@ -45,6 +45,7 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
         	.formLogin()
         	.loginPage("/login.html") //  定义当需要用户登录时候，转到的登录页面。
         	//.defaultSuccessUrl("/getuser")
+        	.failureUrl("/loginfail.html")
         	.loginProcessingUrl("/user/login").permitAll()
         	.successHandler(loginSuccessHandle)
         	.and()
@@ -93,6 +94,6 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
 	    if (auth != null) {
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
 	    }
-	    return "redirect:/admin/index.html";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+	    return "redirect:/login.html";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
 	}
 }
