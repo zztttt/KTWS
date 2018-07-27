@@ -27,7 +27,7 @@ public class User implements Serializable{
 	private String username;
 	
 	/***********************/
-	@OneToMany(cascade={CascadeType.PERSIST},mappedBy="user")  
+	@OneToMany(mappedBy="user")  
 	private Set<Course> courseSet = new HashSet<Course>();
 	
 	public Set<Course> getCourseSet() {
