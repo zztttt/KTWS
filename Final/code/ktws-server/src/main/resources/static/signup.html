@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+    <link rel="stylesheet" type="text/css" href="./login/signup.style.css">
+    <script type="text/javascript">
+    	Back(){
+    		window.history.go(-1);
+    	}
+    </script>
+</head>
+<body>
+<div id="content">
+    <div class="signup-header">
+        <text>课堂威视注册系统</text>
+    </div>
+    <form action="/signup"  method="post">
+        <div class="signup-input-box">
+            <span class="icon">用户名:&nbsp;</span>
+            <input type="text" placeholder=" 请 输 入 用 户 名" name="username">
+        </div>
+        <div class="remember-box">
+        </div>
+        <div class="signup-input-box">
+            <span class="icon">密&nbsp;&nbsp;&nbsp;码&nbsp;:</span>
+            <input type="password" placeholder=" 请 输 入 密 码" name="password">
+        </div>
+        <div class="remember-box">
+        </div>
+        <div class="signup-button-box">
+            <button type="submit">注册</button>
+        </div>
+        <div class="signup-button-box">
+            <button type="button" onclick="javascript:history.back();">返回</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

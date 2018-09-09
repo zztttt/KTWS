@@ -107,7 +107,6 @@ class Content extends Component{
     super(props);
     this.state = { 
       value: '',
-      date:null,
       dayStatistics:[0,0,0,0,0,0,0,0,0,0,0,0,0],
       config1:config1,
       num:0
@@ -135,7 +134,7 @@ class Content extends Component{
     const dateFormat = 'YYYY/MM/DD';
     return (
       <div>
-        <DatePicker value={this.state.date} onChange={this.handleChange} format={dateFormat} />
+        <DatePicker onChange={this.handleChange} format={dateFormat} />
         <Panel bsStyle="info">
           <Panel.Heading>
             <Panel.Title componentClass="h3">{this.state.num}</Panel.Title>
