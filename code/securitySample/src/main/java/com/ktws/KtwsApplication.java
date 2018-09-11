@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ktws.Entity.User;
-import com.ktws.Grab.Grab;
 import com.ktws.Dao.UserDao;
 
 @SpringBootApplication
